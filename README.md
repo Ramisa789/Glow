@@ -5,6 +5,8 @@
 
 Use this website to help get started: https://stackpython.medium.com/how-to-start-django-project-with-a-database-postgresql-aaa1d74659d8
 
+tip: i skipped the enviornmental variable stuff and u need postgres 12+
+
 ## Step 1: Set Up Virtual Environment
 
 Create and activate a virtual environment:
