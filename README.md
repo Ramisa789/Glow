@@ -3,7 +3,7 @@
 
 # To Connect Django with PostgreSQL
 
-Use this website to help get started.
+Use this website to help get started: https://stackpython.medium.com/how-to-start-django-project-with-a-database-postgresql-aaa1d74659d8
 
 ## Step 1: Set Up Virtual Environment
 
