@@ -11,9 +11,20 @@ tip: i skipped the enviornmental variable stuff and u need postgres 12+
 
 Create and activate a virtual environment:
 
+Windows:
 ```bash
 python -m venv venv
+```
+```bash
 .\venv\Scripts\activate
+```
+
+Mac:
+```bash
+python3 -m venv venv
+```
+```bash
+source venv/bin/activate
 ```
 
 Install the required dependencies:
