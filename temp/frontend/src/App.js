@@ -1,45 +1,21 @@
-// import logo from './logo.svg';
-// import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './Pages/LanginPage';
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import SkinCareGenerator from './Pages/SkinCareGenerator';
+import UserProfile from './Pages/UserProfile';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-
-function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    axios.get("http://localhost:8000/api/hello/")
-      .then(response => setMessage(response.data.message))
-      .catch(error => console.error("Error fetching data:", error));
-  }, []);
-
+function App(){
   return (
     <div>
-      <h1>{message}</h1>
+      <Router>
+        <Route exac path = '//' element={<LandingPage/>}/>
+        <Route exac path = '/login' element={<Login/>}/>
+        <Route exac path = '/SignUp' element={<SignUp/>}/>
+        <Route exac path = '/SkinCareGenerator' element={<SkinCareGenerator/>}/>
+        <Route exac path = '/UserProfile' element={<UserProfile/>}/>
+      </Router>
     </div>
   );
 }
