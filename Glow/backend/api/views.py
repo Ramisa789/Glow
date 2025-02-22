@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+import google.generativeai as genai
+from django.conf import settings
 import json
 
 def home(request):
@@ -48,6 +52,18 @@ def user_login(request):
             return JsonResponse({"message": "Invalid credentials!"}, status=400)
         
     return JsonResponse({"message": "Invalid request method!"}, status=400)
+
+
+genai.configure(api_key=settings.GEMINI_API_KEY)
+
+@api_view(['POST'])
+def generate_response(request):
+    print("debugging print statment for this url")
+    user_input = request.data.get("prompt", "")
+    model = genai.GenerativeModel("gemini-pro")
+    response = model.generate_content(user_input)
+    
+    return Response({"response": response.text})
 
     
 

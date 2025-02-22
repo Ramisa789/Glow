@@ -28,6 +28,8 @@ Install the required dependencies:
 
 ```bash
 pip install django psycopg2 django-cors-headers
+pip install google-generativeai
+pip install djangorestframework
 ```
 
 ## Step 2: Setup Environment Variables
@@ -43,8 +45,11 @@ DB_USER=your_user_name
 DB_PASSWORD=your_password
 DB_HOST=your_host
 DB_PORT=your_port_number
+DJANGO_KEY=secret_key
+GEMINI_API_KEY=your_gemini_api_key
+
 ```
-This is already included in the `.gitignore` but double check that you won't commit it to the repository. These environment variables will then be used by `backend/config/settings.py` to get you connected to your databse.
+This is already included in the `.gitignore` but double check that you won't commit it to the repository. These environment variables will then be used by `backend/config/settings.py` to get you connected to your database and Gemini.
 
 ```python
 DATABASES = {
