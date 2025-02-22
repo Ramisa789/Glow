@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import google.generativeai as genai
+from django.conf import settings
 import json
 
 def home(request):
@@ -53,7 +54,7 @@ def user_login(request):
     return JsonResponse({"message": "Invalid request method!"}, status=400)
 
 
-genai.configure(api_key="AIzaSyBU8lHJKbYVFPQBgGvo5_7CCGBlk1pftm8")
+genai.configure(api_key=settings.GEMINI_API_KEY)
 
 @api_view(['POST'])
 def generate_response(request):
