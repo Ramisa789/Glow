@@ -1,6 +1,6 @@
 import "./SignUp.css";
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 export default function SignUp() {
@@ -12,6 +12,7 @@ export default function SignUp() {
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
 
     const handleInput = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,6 +37,8 @@ export default function SignUp() {
             });
 
             setSuccess(response.data.message);
+            // Redirect to generator after successful signup
+            navigate('/skincaregenerator')
         } catch (err) {
             setError(err.response?.data?.error || "Signup failed.");
         }

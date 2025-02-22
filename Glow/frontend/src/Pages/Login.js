@@ -1,19 +1,26 @@
 import "./Login.css";
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const credentials = { username, password };
         axios.post('http://127.0.0.1:8000/login/', credentials)
-            .then(response => setMessage(response.data.message))
+            .then(response => {
+                setMessage(response.data.message);
+                // Redirect on successful login
+                if (response.data.message === "Login successful!") {
+                    navigate('/skincaregenerator');
+                }
+            })
             .catch(error => setMessage(error.response.data.message));
     };
 
