@@ -34,6 +34,21 @@ def signup(request):
    
     return JsonResponse({"error": "Invalid request method."}, status=405)
 
+@csrf_exempt # Allow POST requests for login
+def user_login(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return JsonResponse({"message": "Login successful!"}, status=200)
+        else:
+            return JsonResponse({"message": "Invalid credentials!"}, status=400)
+        
+    return JsonResponse({"message": "Invalid request method!"}, status=400)
 
     
 
