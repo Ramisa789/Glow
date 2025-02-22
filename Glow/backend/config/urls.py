@@ -25,8 +25,10 @@
 from django.contrib import admin
 from django.urls import path
 from api.views import home
+from api.views import signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),  
+    path('signup/', signup, name='signup'),
 ]
