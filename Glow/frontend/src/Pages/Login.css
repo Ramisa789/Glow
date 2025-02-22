@@ -1,0 +1,14 @@
+body {
+    background-color: #FAF8F1;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Ensure it covers the full screen */
+    display: flex;
+    align-items: center;
+}
+
+.graphic{
+    padding: 100px;
+    justify-content: left;
+    border-radius: 12px;
+}
