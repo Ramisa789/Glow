@@ -27,10 +27,12 @@ from django.urls import path
 from api.views import home
 from api.views import signup
 from api.views import user_login
+from api.views import generate_response
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),  
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
+    path('generate/', generate_response, name='generate_response'),
 ]
