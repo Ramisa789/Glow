@@ -25,8 +25,12 @@
 from django.contrib import admin
 from django.urls import path
 from api.views import home
+from api.views import signup
+from api.views import user_login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),  
+    path('signup/', signup, name='signup'),
+    path('login/', user_login, name='login'),
 ]
