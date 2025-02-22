@@ -3,7 +3,7 @@
 # # Create your views here.
 
 
-from django.http import JsonResponse
+from django.http import HttpResponse
 
-def hello_world(request):
-    return JsonResponse({"message": "Hello from Django!"})
+def home(request):
+    return HttpResponse("Hello from Django!")
