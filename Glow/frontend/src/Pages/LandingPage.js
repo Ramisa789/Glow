@@ -21,7 +21,10 @@ export default function LandingPage() {
                      products and step-by-step instructions designed specifically for your needs. Say goodbye 
                      to trial and error—our personalized approach takes the guesswork out of skincare so 
                      you can feel confident in your skin every day.</p>
-                <button class="cta-button">Get Started →</button>
+                    <a href="login.js">
+                        <button class="cta-button">Get Started →</button>
+                    </a>
+
             </div>
         </div>
 

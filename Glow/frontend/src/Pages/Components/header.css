@@ -1,0 +1,24 @@
+.header {
+    display: flex;  
+    align-items: center;  
+    background-color: #CAD19F;
+    max-width: 94%;
+    height: 50px;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 0 auto;
+    margin-top: 35px;
+  }
+  
+  .logo {
+    max-height: 60px;  
+    width: auto;
+    margin-right: 10px; 
+  }
+  
+  .text { 
+    color: #535231;
+    font-size: 38px;
+    font-style: italic;
+  }
+  
