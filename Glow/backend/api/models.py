@@ -18,10 +18,3 @@ class Routine(models.Model):
 class RoutineProduct(models.Model):
     routine = models.ForeignKey(Routine, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-
-class UserBudget(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
-    max_routine_budget = models.DecimalField(max_digits=10, decimal_places=2)
-    max_product_price = models.DecimalField(max_digits=10, decimal_places=2)
-    min_prodict_price = models.DecimalField(max_digits=10, decimal_places=2)
-    currency = models.CharField(max_length=3)
