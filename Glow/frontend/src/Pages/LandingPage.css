@@ -5,7 +5,7 @@ body {
   
   .container {
     display: flex;
-    gap: 40px; 
+    gap: 65px; 
     justify-content: center;
     flex-wrap: wrap-reverse;
   }
@@ -41,18 +41,20 @@ body {
     font-weight: bold;
     font-style: italic;
     text-align: left;
-    padding: 50px;
+    padding: 80px;
     padding-bottom: 0px;
-    margin-bottom: 15px;
+    margin-bottom:1%;
   }
   
   .text-box p {
     color: #FF5E5E;
     line-height: 1.6;
     text-align: left;
-    padding: 50px;
+    padding: 80px;
     padding-top: 0px;
     font-size: 16px;
+    padding-bottom: 2%;
+    font-weight:500;
   }
   
   .cta-button {
@@ -65,20 +67,16 @@ body {
     cursor: pointer;
     transition: 0.3s;
     width: 250px;
-    margin: 0 auto;
     background-color: rgb(255, 255, 255);
-    margin-left: 250px;
+    text-align: center;
+    margin-left:80px;
+   
+    
   }
   
   .cta-button:hover {
     background: #FF5E5E;
     color:rgb(255, 255, 255);
-  }
-
-  @media only screen and (max-width: 600px){
-    .text-box{
-        width: 90%;
-    }
   }
 
   @media only screen and (max-width: 1200px){
@@ -88,4 +86,46 @@ body {
     .image-box{
         display: none;
     }
+
+  @media only screen and (max-width: 650px){
+    .text-box{
+        width: 90%;
+    }
+    .text-box p{
+        font-size:14px;
+    }
+    .text-box h2{
+        padding-top:15px;
+    }
+  }
+
+  @media only screen and (max-width: 500px){
+    .text-box p{
+        font-size: 13px;
+        padding-left:40px;
+        padding-right:40px;
+        margin-top:15px;
+    }
+    .text-box h2{
+        margin-top:20px;
+        font-size:30px;
+        padding-top: 8px;
+        width:80%;
+        padding-left:40px;
+        padding-right:40px;
+    }
+    .text-box{
+        width: 75%;
+    }
+
+    .cta-button{
+        margin-left:40px;
+        font-size:12px;
+        width:150px;
+        padding:8px;
+        margin-top:20px;
+    }
+  }
+ 
+    
   }
