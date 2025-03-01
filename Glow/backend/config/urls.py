@@ -34,5 +34,5 @@ urlpatterns = [
     path('', home, name='home'),  
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
-    path('generate/', generate_response, name='generate_response'),
+    path('LLMTest/', generate_response, name='generate_response'),
 ]

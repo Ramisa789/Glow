@@ -60,10 +60,12 @@ genai.configure(api_key=settings.GEMINI_API_KEY)
 def generate_response(request):
     print("debugging print statment for this url")
     user_input = request.data.get("prompt", "")
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel("gemini")
     response = model.generate_content(user_input)
     
     return Response({"response": response.text})
+
+
 
     
 
