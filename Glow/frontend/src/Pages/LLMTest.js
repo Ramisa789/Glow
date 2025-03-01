@@ -54,22 +54,135 @@ export default function LLMTest() {
     };
 
     const handleSubmit = async () => {
-        // Construct the prompt for Gemini based on form data
-        const prompt = `
-            Based on the user's selections, create a personalized skincare routine.
-            Skin Type: ${formData.skin_type}
-            Routine Type: ${formData.routine_type}
-            Skin Concerns: ${formData.skin_concerns.join(", ")}
-            Product Criteria: ${formData.product_criteria.join(", ")}
-            Allergies: ${formData.allergies}
-            Skin Conditions: ${formData.skin_conditions}
-            Budget: ${formData.budget}
-            Price Range: ${formData.min_price} - ${formData.max_price}
-        `;
+        // Construct the prompt for Gemini based on form data  
+        const prompt = `  
+        Based on the user's selections, generate a personalized skincare routine.  
 
-        const res = await axios.post("http://127.0.0.1:8000/LLMTest/", { prompt });
-        setResponse(res.data.response);
+        ### User Selections:
+        - Skin Type: ${formData.skin_type}
+        - Routine Type: ${formData.routine_type}
+        - Skin Concerns: ${formData.skin_concerns.join(", ")}
+        - Product Criteria: ${formData.product_criteria.join(", ")}
+        - Allergies: ${formData.allergies}
+        - Skin Conditions: ${formData.skin_conditions}
+        - Budget: ${formData.budget}
+        - Price Range: ${formData.min_price} - ${formData.max_price}
+
+        ### Expected JSON Format:  
+        Return the routine **strictly** in this format:  
+        {
+        "day routine": [
+            {
+            "step": 1,
+            "name": "Prudct name",
+            "price": "$17.99",
+            "application": "steps on how to apply"
+            },
+            {
+            "step": 2,
+            "name": "Product name",
+            "price": "$25.00",
+            "application": "steps on how to apply"
+            },
+            {
+            "step": 3,
+            "name": "Product name",
+            "price": "$6.00",
+            "application": "steps on how to apply"
+            }
+        ],
+        "night routine": [
+            {
+            "step": 1,
+            "name": "Product name",
+            "price": "$17.99",
+            "application": "steps on how to apply"
+            },
+            {
+            "step": 2,
+            "name": "Product name",
+            "price": "$25.00",
+            "application": "steps on how to apply"
+            },
+            {
+            "step": 3,
+            "name": "The Ordinary Niacinamide 10% + Zinc 1%",
+            "price": "$6.00",
+            "application": "steps on how to apply"
+            }
+        ]
+        }
+
+        ### Constraints:  
+        - **Follow the exact JSON structure** provided above.  
+        - **Use the same field names** ("day routine" and "night routine") with lowercase keys.  
+        - Each routine must be an **array of objects** with: "step", "name", "price", and "application".
+        - If the routine type is only "Day", return an empty array for "night routine" and vice versa. If the routine type is both, provide for both day and night.
+        - Do **not** include any extra text, explanations, or formatting outside the JSON response.  
+        `;  
+
+
+        try {
+            const res = await axios.post("http://127.0.0.1:8000/LLMTest/", { prompt });
+            let rawResponse = res.data.response;
+            console.log(rawResponse)
+    
+            // Extract actual JSON from response (removing triple backticks)
+            let jsonString = rawResponse.replace(/```json|```/g, "").trim();
+    
+            // Parse JSON
+            let parsedResponse = JSON.parse(jsonString);
+            console.log(parsedResponse);
+            
+            // Update state with parsed response
+            setResponse(parsedResponse);
+        } catch (error) {
+            console.error("Error parsing LLM response:", error);
+        }
     };
+
+    const renderResponse = () => {
+        if (!response || typeof response !== "object") return <p>No routine found.</p>;
+    
+        // Check which routine type is available
+        const dayRoutine = response["day routine"];
+        const nightRoutine = response["night routine"];
+    
+        // Determine what to display based on availability
+        if ((!dayRoutine || dayRoutine.length === 0) && (!nightRoutine || nightRoutine.length === 0)) {
+            return <p>No routine available.</p>;
+        }
+    
+        return (
+            <div>
+                {dayRoutine && dayRoutine.length > 0 && (
+                    <>
+                        <h3>Day Routine - Products and Prices:</h3>
+                        {dayRoutine.map((step) => (
+                            <div key={step.step}>
+                                <p><strong>Step {step.step}: {step.name}</strong></p>
+                                <p>Price: {step.price}</p>
+                                <p><strong>How to Apply:</strong> {step.application}</p>
+                            </div>
+                        ))}
+                    </>
+                )}
+    
+                {nightRoutine && nightRoutine.length > 0 && (
+                    <>
+                        <h3>Night Routine - Products and Prices:</h3>
+                        {nightRoutine.map((step) => (
+                            <div key={step.step}>
+                                <p><strong>Step {step.step}: {step.name}</strong></p>
+                                <p>Price: {step.price}</p>
+                                <p><strong>How to Apply:</strong> {step.application}</p>
+                            </div>
+                        ))}
+                    </>
+                )}
+            </div>
+        );
+    };    
 
     return (
         <div>
@@ -172,12 +285,7 @@ export default function LLMTest() {
 
             <button onClick={handleSubmit}>Generate Routine</button>
 
-            {response && (
-                <div>
-                    <h3>Generated Routine:</h3>
-                    <p>{response}</p>
-                </div>
-            )}
+            {renderResponse()}
         </div>
     );
 }
