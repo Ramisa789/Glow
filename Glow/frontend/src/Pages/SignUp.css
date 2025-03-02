@@ -1,37 +1,32 @@
 body {
     background-color: #FAF8F1;
-    /* margin: 0;
-    padding: 0;
-    */
     height: 100vh;
-
-    /* align-items: center; */
 }
 
 .layout{
     display: flex;
+    gap: 65px;
+    margin-top: 40px;
+    justify-content: center;
+    flex-wrap: wrap-reverse;
 }
 
 .graphic{
-    margin-top: 80px;
-    margin-left: 80px;
-    justify-content: left;
     border-radius: 20px;
-    width: 750px;
+    width: 790px;
+    height: 730px;
 }
 
 .form{
     align-items: center;
     justify-content: center;
-    width: 720px;
-    height: 770px;
+    width: 730px;
+    height: 730px;
     border-color: #FF5252;
     border-width: 3px;
     border-style: solid;
     border-radius: 25px;
-    margin-top: 80px;
-    margin-left: 50px;
-    padding-top: 20px;
+    /* margin-left: 50px; */
     color: #FF5252;
     text-align: center;
 }
