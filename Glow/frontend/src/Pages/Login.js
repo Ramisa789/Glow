@@ -5,6 +5,9 @@ import SignUp from "./SignUp";
 
 export default function Login() {
     return(
+        <div>
+            
+        </div>
 
     );
 }
