@@ -1,0 +1,137 @@
+body {
+    background-color: #FAF8F1;
+    /* margin: 0;
+    padding: 0;
+    */
+    height: 100vh;
+
+    /* align-items: center; */
+}
+
+.layout{
+    display: flex;
+}
+
+.graphic{
+    margin-top: 80px;
+    margin-left: 80px;
+    justify-content: left;
+    border-radius: 20px;
+    width: 750px;
+}
+
+.form{
+    align-items: center;
+    justify-content: center;
+    width: 720px;
+    height: 770px;
+    border-color: #FF5252;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 25px;
+    margin-top: 80px;
+    margin-left: 50px;
+    padding-top: 20px;
+    color: #FF5252;
+    text-align: center;
+}
+
+.form h1{
+    font-style: italic;
+    font-size: 60px;
+    margin-bottom: 2px;
+}
+
+.signup-prompt{
+    font-size: 28px;
+    margin-top: 2px;
+    font-weight: 250;
+}
+
+
+.user-input {
+    color: #FF9A9A;
+    font-style: italic;
+    font-size: 23px;
+    font-weight: 250;
+    width: 350px;
+    background-color: #FAF8F1;
+    padding: 12px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 8px;
+    border-radius: 100px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #FF5252;
+    color: #FF9A9A;
+    font-weight: 250;
+}
+
+.form form input::placeholder{
+    color: #FF9A9A;
+    font-weight: 250;
+}
+
+.button {
+    background-color: #FF5252;
+    color: #FAF8F1; 
+    width: 416px;
+    border-radius: 100px;
+    border-style: none;
+    font-size: 23px;
+    font-weight: 1000;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding: 14px;    
+    margin: 8px;
+}
+
+.error-text{
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+.form a{
+    font-weight: bold;
+    color: #FF5252;
+    text-decoration: none;
+    font-size: 20px;
+    
+}
+
+.login-prompt {
+    font-size: 20px;
+}
+
+.line-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF5252;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.line-text::before {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background-color: #FF5252;
+    margin-left: 20%;
+    margin-right: 20px;
+}
+
+.line-text::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background-color: #FF5252;
+    margin-left: 20px;
+    margin-right: 20%;
+}
+
