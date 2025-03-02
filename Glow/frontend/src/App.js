@@ -4,7 +4,6 @@ import LandingPage from './Pages/LandingPage';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import SkinCareGenerator from './Pages/SkinCareGenerator';
-import UserProfile from './Pages/UserProfile';
 import LLMTest from './Pages/LLMTest';
 import SavedRoutines from './Pages/savedRoutines';
 
