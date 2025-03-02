@@ -58,9 +58,9 @@ export default function SignUp() {
                     <input className = "button" type="submit" value="Sign Up" /> 
                 </form>
                 <p className="error-text">Passwords do not match!</p>
-                <p className="login-prompt">Already have an account? <a href= "Login">Login here</a></p>
+                <p className="login-prompt">Already have an account? <a  className="login-text"href= "Login">Login here</a></p>
                 <div class="line-text">OR</div>
-                <button className="button">Continue as Guest</button>
+                <a  className= "button" href = "SkinCareGenerator">Continue as Guest</a>
 
 
             </div>
