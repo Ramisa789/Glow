@@ -1,0 +1,77 @@
+/* Wrapper for each routine */
+.routine-wrapper {
+    margin-bottom: 20px;
+  }
+  
+  .routine-date {
+    font-size: 20px;
+    color: #e74c3c;
+    margin-bottom: 10px;
+    margin-left: 3%;
+    margin-top:3%;
+  }
+  
+  .routine-container {
+    display: flex;
+    background: #fff7f7;
+    border: 2px solid #ff7a7a;
+    border-radius: 12px;
+    padding: 20px;
+    width: 91%;
+    margin-left:3%;
+    margin-right:2%;
+    flex-wrap:nowrap;
+    margin: 0 auto;
+
+  }
+  
+  .routine-section {
+    flex: 1;
+    padding: 16px;
+  }
+  
+  .day-routine {
+    border-right: 2px solid #ffabab;
+  }
+  
+  .routine-header {
+    display: flex;
+    justify-content: center;
+    padding: 6px 16px;
+    border: 2px solid #e74c3c;
+    border-radius: 24px;
+    font-weight: bold;
+    color: #e74c3c;
+  }
+  
+
+  .routine-list {
+    margin-top: 5%;
+    list-style: none;
+    padding: 0;
+    margin-left: 5%;
+  }
+  
+  .routine-list li {
+    color: #e74c3c;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size:18px;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .routine-container {
+        flex-wrap: wrap; /* Change to wrap */
+        width:80%
+
+    }
+
+    .routine-section {
+        flex: 1 1 80%; /* Allow sections to take full width */
+    }
+
+    .day-routine {
+        border-right: none; /* Optional: Remove border in small screens */
+    }
+}
+

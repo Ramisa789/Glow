@@ -6,6 +6,7 @@ import SignUp from './Pages/SignUp';
 import SkinCareGenerator from './Pages/SkinCareGenerator';
 import UserProfile from './Pages/UserProfile';
 import LLMTest from './Pages/LLMTest';
+import SavedRoutines from './Pages/savedRoutines';
 
 function App(){
   return (
@@ -18,6 +19,7 @@ function App(){
           <Route path = '/SkinCareGenerator' element={<SkinCareGenerator/>}/>
           <Route path = '/UserProfile' element={<UserProfile/>}/>
           <Route path = '/LLMTest' element={<LLMTest />}/>
+          <Route path = '/SavedRoutines' element={<SavedRoutines/>}/>
         </Routes>
       </Router>
     </div>
