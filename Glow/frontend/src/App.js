@@ -17,7 +17,6 @@ function App(){
           <Route path = '/login' element={<Login/>}/>
           <Route path = '/SignUp' element={<SignUp/>}/>
           <Route path = '/SkinCareGenerator' element={<SkinCareGenerator/>}/>
-          <Route path = '/UserProfile' element={<UserProfile/>}/>
           <Route path = '/LLMTest' element={<LLMTest />}/>
           <Route path = '/SavedRoutines' element={<SavedRoutines/>}/>
         </Routes>
