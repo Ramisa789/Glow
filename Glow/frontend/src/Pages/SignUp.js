@@ -45,13 +45,13 @@ export default function SignUp() {
     };
 
     return (
-        <div className="body"> 
+        <div className="signup-body"> 
             <Header />      
-            <div className="layout">
-                <div className="image-box">
+            <div className="signup-layout">
+                <div className="signup-image-box">
                     <img src={SignUpGraphic} alt="Strawberry themed graphics on top of a pink face mask" />
                 </div>
-                <div className="form-box">
+                <div className="signup-form-box">
                     <h1>Welcome!</h1>
                     <p className="signup-prompt">Sign up for Glow to save your skincare routines with ease</p>
                     
@@ -59,7 +59,7 @@ export default function SignUp() {
                         <input className="user-input" type="text" name="username" placeholder="Username" onChange={handleInput} required /><br/>
                         <input className="user-input" type="password" name="password" placeholder="Password" onChange={handleInput} required /><br/>
                         <input className="user-input" type="password" name="confirm_password" placeholder="Re-enter Password" onChange={handleInput} required /><br/>
-                        <button className="button" type="submit">Sign Up</button>
+                        <button className="signup-button" type="submit">Sign Up</button>
                     </form>
 
                     <p className="error-text">{error}</p>
@@ -67,7 +67,7 @@ export default function SignUp() {
                         Already have an account? <a className="login-text" href="Login">Login here</a>
                     </p>
                     <div className="line-text">OR</div>
-                    <a className="button" href="SkinCareGenerator">Continue as Guest</a>
+                    <a className="signup-button" href="SkinCareGenerator">Continue as Guest</a>
                 </div>
             </div>
         </div>
