@@ -49,10 +49,10 @@ export default function SignUp() {
         <body> 
         <Header />      
         <div className="layout">
-            <div>
-                <img src= "LoginSignInGraphic.png" className="graphic" alt="Strawberry themed graphics on top of a pink face mask" ></img>
+            <div className="image-box">
+                <img src= "/LoginSignInGraphic.png" alt="Strawberry themed graphics on top of a pink face mask" ></img>
             </div>
-            <div className = "form">
+            <div className = "form-box">
                 <h1>Welcome!</h1>
                 <p className="signup-prompt">Sign up for Glow to save your skin <br />care routines with ease</p>
                 <form>  
