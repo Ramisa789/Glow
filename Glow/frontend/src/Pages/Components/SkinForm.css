@@ -50,7 +50,7 @@ select {
 	border-radius: 20px;
 	border: 1px solid var(--greenMid);
 	cursor: pointer;
-	box-shadow: 1px 1px 2px var(--black);
+	box-shadow: 1px 1px 2px var(--softBlack);
 }
 
 select:focus {
@@ -71,7 +71,7 @@ input {
 	background: var(--gray);
 	border-radius: 20px;
 	border: 1px solid var(--greenMid);
-	box-shadow: 1px 1px 2px var(--black);
+	box-shadow: 1px 1px 2px var(--softBlack);
 }
 
 input:focus {
@@ -108,9 +108,9 @@ input[type="checkbox"] {
 	width: 18px;
 	height: 18px;
 	appearance: none; /* Removes default checkbox styling */
-	background-color: var(--gray); /* Background for unselected checkbox */
+	background-color: var(--gray);
 	border: none;
-	border-radius: 5px; /* Optional: makes checkboxes rounded */
+	border-radius: 5px;
 	cursor: pointer;
 	display: inline-block;
 	position: relative;
@@ -118,20 +118,18 @@ input[type="checkbox"] {
 
 /* Change background when checked */
 input[type="checkbox"]:checked {
-	background-color: var(--greenMid); /* Background for selected checkbox */
-	border-color: var(--greenDark); /* Darker border when checked */
+	background-color: var(--greenMid);
 }
 
 /* Add checkmark when checked */
 input[type="checkbox"]:checked::after {
 	content: "✔"; /* Unicode checkmark */
-	font-size: 14px;
-	color: white;
+	font: 600 14px var(--fontTitle);
+	color: var(--white);
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	font-weight: bold;
 }
 
 .selected-text {
@@ -161,7 +159,7 @@ input[type="checkbox"]:checked::after {
 	border: none;
 	cursor: pointer;
 	transition: all 0.3s ease;
-	box-shadow: 1px 1px 2px var(--black);
+	box-shadow: 1px 1px 2px var(--softBlack);
 }
 
 .custom-button:hover {
