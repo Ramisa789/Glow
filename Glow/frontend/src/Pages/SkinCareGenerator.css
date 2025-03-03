@@ -2,9 +2,12 @@
 	background: var(--beige);
 	min-height: 100vh; /* Ensures it covers the whole viewport */
 	padding: 50px;
-	/*display: flex;*/
-	/*justify-content: center;*/
-	/*align-items: center;*/
+}
+
+.widthContainer {
+	display: block;
+	width: 70%;
+	margin: auto;
 }
 
 .header {

@@ -229,9 +229,9 @@ export default function SkinForm() {
 				<div className="item5-skinConcerns">
 					<div className="subTitle">Skin Concerns</div>
 					<div className="multi-select-container">
-						<div className="checkbox-flexbox">
+						<div className="checkbox-grid">
 							{skinConcerns.map((concern) => (
-								<label key={concern} className="checkbox-label-v1">
+								<label key={concern} className="checkbox-label">
 									<input
 										type="checkbox"
 										value={concern}
@@ -254,10 +254,10 @@ export default function SkinForm() {
 				{/* Ingredient Preferences ------------------------------------------------------------------------- */}
 				<div className="item1-ingredients">
 					<div className="subTitle">Ingredient Preferences</div>
-					<div className="multi-select-container" style={{width: 500}}>
-						<div className="checkbox-flexbox">
+					<div className="multi-select-container">
+						<div className="checkbox-grid">
 							{ingredientPreferences.map((ingredient) => (
-								<label key={ingredient} className="checkbox-label-v2">
+								<label key={ingredient} className="checkbox-label">
 									<input
 										type="checkbox"
 										value={ingredient}
@@ -277,9 +277,9 @@ export default function SkinForm() {
 				<div className="item2-ethicalSustainability">
 					<div className="subTitle">Ethical & Sustainability Concerns</div>
 					<div className="multi-select-container">
-						<div className="checkbox-flexbox">
+						<div className="checkbox-grid">
 							{ethicalSustainabilityConcerns.map((concern) => (
-								<label key={concern} className="checkbox-label-v2">
+								<label key={concern} className="checkbox-label">
 									<input
 										type="checkbox"
 										value={concern}
@@ -312,7 +312,7 @@ export default function SkinForm() {
 				{/* Min Price Input -------------------------------------------------------------------------------- */}
 				<div className="item4-minPrice">
 					<div className="subTitle">Minimum Price</div>
-					<div className="input-container">
+					<div className="input-container" style={{width: 200}}>
 						<input
 							type="text"
 							id="priceMin"
@@ -326,7 +326,7 @@ export default function SkinForm() {
 				{/* Max Price Input -------------------------------------------------------------------------------- */}
 				<div className="item5-maxPrice">
 					<div className="subTitle">Maximum Price</div>
-					<div className="input-container">
+					<div className="input-container" style={{width: 200}}>
 						<input
 							type="text"
 							id="priceMax"

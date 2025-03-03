@@ -8,10 +8,9 @@ import SkinForm from "./Components/SkinForm";
 export default function SkinCareGenerator() {
     return(
        <div className="container">
-           <div className="header">Skin-Care Generator</div>
-
-           <div className="formContainer">
-               <SkinForm />
+           <div className="widthContainer">
+               <div className="header">Skin-Care Generator</div>
+               <div className="formContainer"><SkinForm/></div>
            </div>
        </div>
     );
