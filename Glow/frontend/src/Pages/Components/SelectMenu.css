@@ -1,0 +1,19 @@
+.dropdown-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 300px;
+}
+
+select {
+	background: var(--gray);
+	padding: 8px;
+	border-radius: 20px;
+	border: 1px solid var(--greenMid);
+	cursor: pointer;
+	box-shadow: -1px -1px 4px var(--black);
+}
+
+select:focus {
+	outline: 2px solid var(--greenMid);
+}

@@ -1,0 +1,18 @@
+.input-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 300px;
+}
+
+input {
+	padding: 10px;
+	background: var(--gray);
+	border-radius: 20px;
+	border: 1px solid var(--greenMid);
+	box-shadow: -1px -1px 4px var(--black);
+}
+
+input:focus {
+	outline: 2px solid var(--greenMid);
+}

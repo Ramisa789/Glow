@@ -1,0 +1,30 @@
+.budget-price-container {
+	display: flex;
+
+	justify-content: flex-start;
+	align-items: stretch;
+
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: flex-start;
+
+	height: 100%;
+	gap: 50px;
+}
+
+.item3-budget, .item4-minPrice, .item5-maxPrice {
+	flex: 1;
+	min-width: 250px;
+}
+
+select, input {
+	padding: 10px;
+	border-radius: 20px;
+	border: 1px solid var(--greenMid);
+	width: 100%;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+select:focus, input:focus {
+	outline: 2px solid var(--greenMid);
+}

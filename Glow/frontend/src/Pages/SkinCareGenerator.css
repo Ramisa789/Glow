@@ -1,0 +1,91 @@
+.container {
+	background: var(--beige);
+	min-height: 100vh; /* Ensures it covers the whole viewport */
+	padding: 50px;
+	/*display: flex;*/
+	/*justify-content: center;*/
+	/*align-items: center;*/
+}
+
+.header {
+	display: inline-block;
+	min-width: 50px;
+	font: 800 20px var(--fontTitle);
+	color: var(--greenDark);
+	padding: 10px 30px;
+	margin-bottom: 50px;
+	border: 2px solid var(--greenDark);
+	border-radius: 30px;
+}
+
+.formContainer {
+	display: block;
+	min-width: 50px;
+	background: var(--white);
+	padding: 50px;
+	margin: auto;
+	border-radius: 20px;
+	box-shadow: 2px 2px 4px var(--black);
+}
+
+.title {
+	font: 800 20px var(--fontTitle);
+	color: var(--greenDark);
+	padding-bottom: 20px;
+}
+
+.subTitle {
+	font: 500 17px var(--fontTitle);
+	color: var(--greenMid);
+	padding-bottom: 20px;
+}
+
+.flex-container {
+	display: flex;
+
+	justify-content: flex-start;
+	align-items: stretch;
+
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: flex-start;
+
+	height: 100%;
+	gap: 50px;
+}
+
+.fex-container > div {
+	background: var(--beige);
+	padding: 10px;
+}
+
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+}
+
+.custom-button {
+	display: inline-block;
+	min-width: 50px;
+	background: var(--greenMid);
+	font: 800 20px var(--fontTitle);
+	color: var(--beige);
+	text-align: center;
+	padding: 10px 30px;
+	border-radius: 30px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-button:hover {
+	background: var(--greenDark);
+}
+
+.custom-button:disabled {
+	background: var(--greenLight);
+	cursor: not-allowed;
+}
