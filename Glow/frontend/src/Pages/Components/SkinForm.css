@@ -50,7 +50,7 @@ select {
 	border-radius: 20px;
 	border: 1px solid var(--greenMid);
 	cursor: pointer;
-	box-shadow: -1px -1px 4px var(--black);
+	box-shadow: 1px 1px 2px var(--black);
 }
 
 select:focus {
@@ -71,7 +71,7 @@ input {
 	background: var(--gray);
 	border-radius: 20px;
 	border: 1px solid var(--greenMid);
-	box-shadow: -1px -1px 4px var(--black);
+	box-shadow: 1px 1px 2px var(--black);
 }
 
 input:focus {
@@ -109,7 +109,7 @@ input[type="checkbox"] {
 	height: 18px;
 	appearance: none; /* Removes default checkbox styling */
 	background-color: var(--gray); /* Background for unselected checkbox */
-	border: 1px solid var(--greenMid); /* Custom border */
+	border: none;
 	border-radius: 5px; /* Optional: makes checkboxes rounded */
 	cursor: pointer;
 	display: inline-block;
@@ -161,7 +161,7 @@ input[type="checkbox"]:checked::after {
 	border: none;
 	cursor: pointer;
 	transition: all 0.3s ease;
-	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 1px 1px 2px var(--black);
 }
 
 .custom-button:hover {
