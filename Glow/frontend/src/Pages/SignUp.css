@@ -1,6 +1,7 @@
-body {
+.body {
     background-color: #FAF8F1;
     height: 100vh;
+    margin-bottom: 100px;
 }
 
 .layout{
@@ -10,6 +11,7 @@ body {
     padding-right: 4%;
     flex-wrap: nowrap;
     justify-content: space-between;
+
 }
 
 .image-box {
@@ -57,8 +59,6 @@ body {
 }
 
 .user-input {
-    color: #FF9A9A;
-    font-style: italic;
     font-size: 23px;
     font-weight: 250;
     width: 100%;
@@ -72,13 +72,18 @@ body {
     border-width: 3px;
     border-style: solid;
     border-color: #FF5252;
-    color: #FF9A9A;
+    color: #FF5252;
     font-weight: 250;
 }
 
 .form-box form input::placeholder{
     color: #FF9A9A;
     font-weight: 250;
+    font-style: italic;
+}
+
+.user-input:focus {
+    outline: 2px solid #FF5252; 
 }
 
 .button {
