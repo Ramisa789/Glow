@@ -52,6 +52,8 @@ body {
     font-size: 28px;
     margin-top: 2px;
     font-weight: 250;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .user-input {
@@ -59,7 +61,8 @@ body {
     font-style: italic;
     font-size: 23px;
     font-weight: 250;
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
     background-color: #FAF8F1;
     padding: 12px;
     padding-left: 30px;
@@ -142,29 +145,29 @@ body {
     margin-right: 20%;
 }
 
-
-/* @media only screen and (max-width: 1600px){
+@media screen and (max-width: 1200px) {
     .image-box {
-        width: 70%;
-        height: 730px;
+        display: none;
     }
-} */
 
-/* @media screen and (max-width: 1200px) {
-    .image-box img {
-        width: 70%;
-        height: 730px; 
+    .layout {
+        justify-content: center;
+    }
+
+    .form-box {
+        width: 100%;
     }
 }
 
-@media screen and (max-width: 800px) {
-    .image-box img {
-        width: 60%;
+@media screen and (max-width: 480px) {
+    .button {
+        width: 90%;
+    }
+    
+    .user-input {
+        width: 80%;
+        max-width: 350px;
+        padding-left: 5%;
     }
 }
 
-@media screen and (max-width: 600px) {
-    .image-box img {
-        width: 50%;
-    }
-} */

@@ -54,7 +54,7 @@ export default function SignUp() {
             </div>
             <div className = "form-box">
                 <h1>Welcome!</h1>
-                <p className="signup-prompt">Sign up for Glow to save your skin <br />care routines with ease</p>
+                <p className="signup-prompt">Sign up for Glow to save your skincare routines with ease</p>
                 <form>  
                     <input className = "user-input" type="email" id="user_email" placeholder="Username" onChange={handleInput} required></input> <br />
                     <input className = "user-input" type="password" id="user_password" placeholder="Password" onChange={handleInput} required></input><br />
