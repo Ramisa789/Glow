@@ -1,0 +1,53 @@
+.generator-container {
+	background: var(--beige);
+	min-height: 100vh; /* Ensures it covers the whole viewport */
+	padding: 50px;
+}
+
+.widthContainer {
+	display: block;
+	width: 80%;
+	max-width: 1000px;
+	margin: auto;
+}
+
+.generator-header {
+	display: inline-block;
+	min-width: 50px;
+	font: 800 20px var(--fontTitle);
+	color: var(--greenDark);
+	padding: 10px 30px;
+	margin-bottom: 50px;
+	border: 2px solid var(--greenDark);
+	border-radius: 30px;
+}
+
+.formContainer {
+	display: block;
+	min-width: 50px;
+	background: var(--white);
+	padding: 50px;
+	margin: auto;
+	border-radius: 20px;
+	box-shadow: 2px 2px 4px var(--softBlack);
+}
+
+@media only screen and (max-width: 500px){
+	.generator-container{
+		padding: 30px;
+	}
+
+	.generator-header{
+		margin-bottom: 20px;
+	}
+
+	.formContainer {
+		padding: 30px;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	.widthContainer{
+		width: 100%;
+	}
+}
