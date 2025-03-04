@@ -1,4 +1,4 @@
-.container {
+.generator-container {
 	background: var(--beige);
 	min-height: 100vh; /* Ensures it covers the whole viewport */
 	padding: 50px;
@@ -6,11 +6,12 @@
 
 .widthContainer {
 	display: block;
-	width: 70%;
+	width: 80%;
+	max-width: 1000px;
 	margin: auto;
 }
 
-.header {
+.generator-header {
 	display: inline-block;
 	min-width: 50px;
 	font: 800 20px var(--fontTitle);
@@ -29,4 +30,24 @@
 	margin: auto;
 	border-radius: 20px;
 	box-shadow: 2px 2px 4px var(--softBlack);
+}
+
+@media only screen and (max-width: 500px){
+	.generator-container{
+		padding: 30px;
+	}
+
+	.generator-header{
+		margin-bottom: 20px;
+	}
+
+	.formContainer {
+		padding: 30px;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	.widthContainer{
+		width: 100%;
+	}
 }

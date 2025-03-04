@@ -44,16 +44,17 @@
 	width: 300px;
 }
 
-select {
+.generator-select {
+	width: 100%;
 	background: var(--gray);
 	padding: 8px;
 	border-radius: 20px;
-	border: 1px solid var(--greenMid);
+	border: none;
 	cursor: pointer;
-	box-shadow: 1px 1px 2px var(--softBlack);
+	box-shadow: inset 1px 1px 2px var(--softBlack);
 }
 
-select:focus {
+.generator-select:focus {
 	outline: 2px solid var(--greenMid);
 }
 
@@ -66,15 +67,15 @@ select:focus {
 	width: 300px;
 }
 
-input {
+.generator-input {
 	padding: 10px;
 	background: var(--gray);
 	border-radius: 20px;
-	border: 1px solid var(--greenMid);
-	box-shadow: 1px 1px 2px var(--softBlack);
+	border: none;
+	box-shadow: inset 1px 1px 2px var(--softBlack);
 }
 
-input:focus {
+.generator-input:focus {
 	outline: 2px solid var(--greenMid);
 }
 
@@ -104,7 +105,7 @@ input:focus {
 	min-width: 200px;
 }
 
-input[type="checkbox"] {
+.generator-input[type="checkbox"] {
 	width: 18px;
 	height: 18px;
 	appearance: none; /* Removes default checkbox styling */
@@ -117,12 +118,12 @@ input[type="checkbox"] {
 }
 
 /* Change background when checked */
-input[type="checkbox"]:checked {
+.generator-input[type="checkbox"]:checked {
 	background-color: var(--greenMid);
 }
 
 /* Add checkmark when checked */
-input[type="checkbox"]:checked::after {
+.generator-input[type="checkbox"]:checked::after {
 	content: "✔"; /* Unicode checkmark */
 	font: 600 14px var(--fontTitle);
 	color: var(--white);

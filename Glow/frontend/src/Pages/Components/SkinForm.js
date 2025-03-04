@@ -160,6 +160,7 @@ export default function SkinForm() {
 					<div className="subTitle">Routine Type</div>
 					<div className="dropdown-container">
 						<select
+							className="generator-select"
 							id="routine-dropdown"
 							value={selectedRoutine}
 							onChange={(e) => setSelectedRoutine(e.target.value)}
@@ -178,6 +179,7 @@ export default function SkinForm() {
 					<div className="subTitle">Skin Type</div>
 					<div className="dropdown-container">
 						<select
+							className="generator-select"
 							id="skinType-dropdown"
 							value={selectedSkinType}
 							onChange={(e) => setSelectedSkinType(e.target.value)}
@@ -196,6 +198,7 @@ export default function SkinForm() {
 					<div className="subTitle">Skin Conditions</div>
 					<div className="input-container">
 						<input
+							className="generator-input"
 							type="text"
 							id="skinConditions"
 							placeholder="e.g., Acne, Eczema, Rosacea"
@@ -213,6 +216,7 @@ export default function SkinForm() {
 					<div className="subTitle">Allergies</div>
 					<div className="input-container">
 						<input
+							className="generator-input"
 							type="text"
 							id="allergyInput"
 							placeholder="e.g., Nuts, Pollen, Dairy"
@@ -233,6 +237,7 @@ export default function SkinForm() {
 							{skinConcerns.map((concern) => (
 								<label key={concern} className="checkbox-label">
 									<input
+										className="generator-input"
 										type="checkbox"
 										value={concern}
 										checked={selectedSkinConcerns.includes(concern)}
@@ -259,6 +264,7 @@ export default function SkinForm() {
 							{ingredientPreferences.map((ingredient) => (
 								<label key={ingredient} className="checkbox-label">
 									<input
+										className="generator-input"
 										type="checkbox"
 										value={ingredient}
 										checked={selectedIngredients.includes(ingredient)}
@@ -281,6 +287,7 @@ export default function SkinForm() {
 							{ethicalSustainabilityConcerns.map((concern) => (
 								<label key={concern} className="checkbox-label">
 									<input
+										className="generator-input"
 										type="checkbox"
 										value={concern}
 										checked={selectedESConcerns.includes(concern)}
@@ -299,7 +306,7 @@ export default function SkinForm() {
 				<div className="item3-budget">
 					<div className="subTitle">Budget</div>
 					<div className="dropdown-container">
-						<select id="budget-dropdown" value={selectedBudget} onChange={handleBudgetChange}>
+						<select className="generator-select" id="budget-dropdown" value={selectedBudget} onChange={handleBudgetChange}>
 							<option value="">Select Budget</option>
 							<option value="low">Budget-Friendly ($ - $$)</option>
 							<option value="medium">Mid-Range ($$ - $$$)</option>
@@ -314,6 +321,7 @@ export default function SkinForm() {
 					<div className="subTitle">Minimum Price</div>
 					<div className="input-container" style={{width: 200}}>
 						<input
+							className="generator-input"
 							type="text"
 							id="priceMin"
 							placeholder="Enter minimum price"
@@ -328,6 +336,7 @@ export default function SkinForm() {
 					<div className="subTitle">Maximum Price</div>
 					<div className="input-container" style={{width: 200}}>
 						<input
+							className="generator-input"
 							type="text"
 							id="priceMax"
 							placeholder="Enter maximum price"
