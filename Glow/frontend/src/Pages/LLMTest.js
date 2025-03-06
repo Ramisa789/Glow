@@ -22,6 +22,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import renderRoutine from "./Components/routine_rendering.js"
 
 export default function LLMTest() {
     const [formData, setFormData] = useState({
@@ -71,7 +72,7 @@ export default function LLMTest() {
         ### Expected JSON Format:  
         Return the routine **strictly** in this format:  
         {
-        "day routine": [
+        "day": [
             {
             "step": 1,
             "name": "Prudct name",
@@ -91,7 +92,7 @@ export default function LLMTest() {
             "application": "steps on how to apply"
             }
         ],
-        "night routine": [
+        "night": [
             {
             "step": 1,
             "name": "Product name",
@@ -119,6 +120,8 @@ export default function LLMTest() {
         - Each routine must be an **array of objects** with: "step", "name", "price", and "application".
         - If the routine type is only "Day", return an empty array for "night routine" and vice versa. If the routine type is both, provide for both day and night.
         - Do **not** include any extra text, explanations, or formatting outside the JSON response.  
+        - The string held in the application field currently with placeholder "steps on how to apply" should be no longer than 400 characters.
+        - Do **not** include dollar signs on any price fields.
         `;  
 
 
@@ -141,48 +144,17 @@ export default function LLMTest() {
         }
     };
 
-    const renderResponse = () => {
-        if (!response || typeof response !== "object") return <p>No routine found.</p>;
-    
-        // Check which routine type is available
-        const dayRoutine = response["day routine"];
-        const nightRoutine = response["night routine"];
-    
-        // Determine what to display based on availability
-        if ((!dayRoutine || dayRoutine.length === 0) && (!nightRoutine || nightRoutine.length === 0)) {
-            return <p>No routine available.</p>;
+    const saveRoutine = async () => {
+        try {
+            if (!response || typeof response !== "object") throw new Error("No response.");
+
+            const res = await axios.post("http://127.0.0.1:8000/SaveRoutine/", response);
+            let rawResponse = res.data.response;
+            console.log(rawResponse)
+        } catch (error) {
+            console.error("Error saving routine:", error);
         }
-    
-        return (
-            <div>
-                {dayRoutine && dayRoutine.length > 0 && (
-                    <>
-                        <h3>Day Routine - Products and Prices:</h3>
-                        {dayRoutine.map((step) => (
-                            <div key={step.step}>
-                                <p><strong>Step {step.step}: {step.name}</strong></p>
-                                <p>Price: {step.price}</p>
-                                <p><strong>How to Apply:</strong> {step.application}</p>
-                            </div>
-                        ))}
-                    </>
-                )}
-    
-                {nightRoutine && nightRoutine.length > 0 && (
-                    <>
-                        <h3>Night Routine - Products and Prices:</h3>
-                        {nightRoutine.map((step) => (
-                            <div key={step.step}>
-                                <p><strong>Step {step.step}: {step.name}</strong></p>
-                                <p>Price: {step.price}</p>
-                                <p><strong>How to Apply:</strong> {step.application}</p>
-                            </div>
-                        ))}
-                    </>
-                )}
-            </div>
-        );
-    };    
+    };
 
     return (
         <div>
@@ -285,7 +257,9 @@ export default function LLMTest() {
 
             <button onClick={handleSubmit}>Generate Routine</button>
 
-            {renderResponse()}
+            {renderRoutine(response)}
+
+            <button onClick={saveRoutine}>Save Routine</button>
         </div>
     );
 }
