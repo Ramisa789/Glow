@@ -1,0 +1,173 @@
+.title {
+	font: 800 20px var(--fontTitle);
+	color: var(--greenDark);
+	padding-bottom: 20px;
+}
+
+.subTitle {
+	font: 500 17px var(--fontTitle);
+	color: var(--greenMid);
+	padding-bottom: 20px;
+}
+
+.flex-container {
+	display: flex;
+
+	justify-content: flex-start;
+	align-items: stretch;
+
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: flex-start;
+
+	height: 100%;
+	gap: 50px;
+}
+
+.fex-container > div {
+	background: var(--beige);
+	padding: 10px;
+}
+
+.item5-skinConcerns,
+.item1-ingredients,
+.item2-ethicalSustainability {
+	width: 100%;
+}
+
+/* Select Menu Styling ---------------------------------------------------------------------------------------------- */
+
+.dropdown-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 300px;
+}
+
+.generator-select {
+	width: 100%;
+	background: var(--gray);
+	padding: 8px;
+	border-radius: 20px;
+	border: none;
+	cursor: pointer;
+	box-shadow: inset 1px 1px 2px var(--softBlack);
+}
+
+.generator-select:focus {
+	outline: 2px solid var(--greenMid);
+}
+
+/* Text Input Styling ----------------------------------------------------------------------------------------------- */
+
+.input-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 300px;
+}
+
+.generator-input {
+	padding: 10px;
+	background: var(--gray);
+	border-radius: 20px;
+	border: none;
+	box-shadow: inset 1px 1px 2px var(--softBlack);
+}
+
+.generator-input:focus {
+	outline: 2px solid var(--greenMid);
+}
+
+/* Multi-Select Styling --------------------------------------------------------------------------------------------- */
+
+.multi-select-container {
+	max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.checkbox-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Dynamic columns */
+	gap: 15px;
+	align-items: center;
+}
+
+/* Default: 4 columns for skin concerns */
+.checkbox-label {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font: 600 15px var(--fontTitle);
+	color: var(--greenDark);
+	cursor: pointer;
+	min-width: 200px;
+}
+
+.generator-input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	appearance: none; /* Removes default checkbox styling */
+	background-color: var(--gray);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+}
+
+/* Change background when checked */
+.generator-input[type="checkbox"]:checked {
+	background-color: var(--greenMid);
+}
+
+/* Add checkmark when checked */
+.generator-input[type="checkbox"]:checked::after {
+	content: "✔"; /* Unicode checkmark */
+	font: 600 14px var(--fontTitle);
+	color: var(--white);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.selected-text {
+	margin-top: 30px;
+	font: 400 15px var(--fontTitle);
+	color: var(--black);
+}
+
+/* Submit Button Styling -------------------------------------------------------------------------------------------- */
+
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+}
+
+.custom-button {
+	display: inline-block;
+	min-width: 50px;
+	background: var(--greenMid);
+	font: 800 20px var(--fontTitle);
+	color: var(--beige);
+	text-align: center;
+	padding: 10px 30px;
+	border-radius: 30px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 1px 1px 2px var(--softBlack);
+}
+
+.custom-button:hover {
+	background: var(--greenDark);
+}
+
+.custom-button:disabled {
+	background: var(--greenLight);
+	cursor: not-allowed;
+}
