@@ -22,6 +22,12 @@
     font-style: italic;
   }
 
+  @media only screen and (max-width:1200px){
+    .header{
+      max-width:85%;
+    }
+  }
+
 
   @media only screen and (max-width: 650px){
     .header{

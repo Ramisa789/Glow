@@ -91,10 +91,11 @@ body {
 
 @media only screen and (max-width: 1200px){
   .text-box{
-    width: 70%;
+    width: 90%;
   }
   .image-box{
     display: none;
+  }
 }
 
 
@@ -106,7 +107,7 @@ body {
       font-size:14px;
   }
   .text-box h2{
-      padding-top:15px;
+      padding-top:50px;
   }
 }
 
@@ -120,7 +121,7 @@ body {
   .text-box h2{
       margin-top:20px;
       font-size:30px;
-      padding-top: 8px;
+      padding-top: 15px;
       width:80%;
       padding-left:40px;
       padding-right:40px;
@@ -136,7 +137,4 @@ body {
       padding:8px;
       margin-top:20px;
   }
-}
-
-  
 }
