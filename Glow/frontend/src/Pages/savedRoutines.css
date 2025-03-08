@@ -1,8 +1,3 @@
-body {
-    background-color: #faf8f1;
-    font-family: Arial, sans-serif;
-  }
-
   .saved-routines-header{
     color: #FF5E5E;
     font-size: 35px;
@@ -39,4 +34,9 @@ body {
 
   .back-arrow {
     margin-right: 5px;
+  }
+
+  .routine-width {
+    width: 98%;
+    margin: auto;
   }

@@ -52,6 +52,17 @@
     color:#FF5E5E ;
   }
 
+.save-button-container {
+	display: flex;
+	align-items: center;
+}
+
+.save-message {
+	color: var(--redDark);
+	margin-left: 10px;
+	font-style: italic;
+}
+
 @media only screen and (max-width: 500px){
 	.generator-container{
 		padding: 30px;

@@ -1,14 +1,12 @@
 import React from 'react';
 import './routine.css';
 
-function Routine({ response, page }){
-    if (!response) return <></>;
-
+function Routine({ response, page, date }){
     return (
         <div className="routine-wrapper">
-          {/* {page === "profile" (
+          {page === "profile" ? (
             <h3 className="routine-date"><em>{date}</em></h3>
-          )} */}
+          ) : null}
           <div className="routine-container">
             
 

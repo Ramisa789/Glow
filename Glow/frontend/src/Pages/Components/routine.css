@@ -4,8 +4,8 @@
   }
   
   .routine-date {
-    font-size: 20px;
-    color: #e74c3c;
+    font-size: 25px;
+    color: var(--redDark);
     margin-bottom: 10px;
     margin-left: 3%;
     margin-top:3%;
@@ -38,20 +38,19 @@
     display: flex;
     justify-content: center;
     padding: 6px 16px;
-    border: 2px solid #e74c3c;
+    border: 2px solid var(--redDark);
     border-radius: 24px;
-    font-weight: bolder;
     font-style: italic;
-    font-size: larger;
-    color: #e74c3c;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--redDark);
   }
-  
 
   .routine-list {
     margin-top: 5%;
     padding: 0;
     margin-left: 5%;
-    color: #e74c3c;
+    color: var(--redDark);
     margin-bottom: 6px;
     font-size:18px;
   }
