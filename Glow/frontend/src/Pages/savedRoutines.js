@@ -7,7 +7,7 @@ import axios from "axios";
 import arrow from "./Images/arrow-left.svg";
 
 export default function SavedRoutines() {
-  const [response, setResponse] = useState([]);
+  const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,8 +21,7 @@ export default function SavedRoutines() {
           let parsedResponse = JSON.parse(rawResponse);
           console.log(parsedResponse);
           
-          // Update state with parsed response
-          setResponse(Array.isArray(parsedResponse) ? parsedResponse : []);
+          setResponse(parsedResponse);
       } catch (error) {
           console.error("Error fetching routine:", error);
           setError(error)
