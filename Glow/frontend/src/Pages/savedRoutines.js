@@ -17,10 +17,11 @@ export default function SavedRoutines() {
           const res = await axios.post("http://127.0.0.1:8000/GetRoutine/");
 
           let rawResponse = res.data.response;
-  
-          let parsedResponse = JSON.parse(rawResponse);
-          console.log(parsedResponse);
           
+          let jsonString = rawResponse.replace(/```json|```/g, "").trim();
+   
+          // Parse JSON
+          let parsedResponse = JSON.parse(jsonString);
           setResponse(parsedResponse);
       } catch (error) {
           console.error("Error fetching routine:", error);
@@ -48,18 +49,7 @@ export default function SavedRoutines() {
                         </button>
                 </a>
                 <div className="routine-width">
-                {response.length > 0 ? (
-                    response.map((routine, index) => (
-                    <Routine 
-                        key={index} 
-                        response={routine} 
-                        page="profile" 
-                        date={routine.date}  // Pass the date for each routine
-                    />
-                    ))
-                ) : (
-                    <></>
-                )}
+                    <Routine response={response} page="profile" date="Feb 14, 2025" />
                 </div>
             </div>
        </div>
