@@ -4,7 +4,8 @@ import Routine from './Components/routine';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import renderRoutine from "./Components/routine_rendering.js"
+import renderRoutine from "./Components/routine_rendering.js";
+import arrow from "./Images/arrow-left.svg";
 
 export default function SavedRoutines() {
   const [response, setResponse] = useState("");
@@ -45,9 +46,12 @@ export default function SavedRoutines() {
     return(
        <div>
        <Header />
-       <h2> My Saved Routines </h2>
-       <a href="SkinCareGenerator">
-            <button class="back-button"> ← Back to generator</button>
+       <h2 className="saved-routines-header"> My Saved Routines </h2>
+       <a className="button-link" href="SkinCareGenerator">
+            <button class="back-button"> 
+                <img className="back-arrow" src={arrow} height={20} width={20} alt="back arrow" />
+                Back to generator
+            </button>
         </a>
         <Routine renderRoutine={renderRoutine} response={response} />
 

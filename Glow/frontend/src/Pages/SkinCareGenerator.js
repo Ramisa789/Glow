@@ -5,6 +5,7 @@ import axios from "axios";
 
 import SkinForm from "./Components/SkinForm";
 import Routine from "./Components/routine";
+import Header from "./Components/header";
 
 export default function SkinCareGenerator() {
     const [response, setResponse] = useState("");
@@ -112,19 +113,22 @@ export default function SkinCareGenerator() {
     }
 
     return(
-       <div className="generator-container">
-           <div className="widthContainer">
-               <div className="generator-header">Skin-Care Generator</div>
-               <div className="formContainer"><SkinForm onSubmit={handleSubmit} /></div>
-               <div className="response-container">
-                {response ? (
-                    <Routine response={response} page="generator"/>
-                ) : (
-                    <></>
-                )}
-               </div>
-               <button className="save-routine-button" onClick={saveRoutine}>Save Routine</button>
-           </div>
+        <div>
+            <Header />
+            <div className="generator-container">
+                <div className="widthContainer">
+                    <div className="generator-header">Skin-Care Generator</div>
+                    <div className="formContainer"><SkinForm onSubmit={handleSubmit} /></div>
+                    <div className="response-container">
+                        {response ? (
+                            <Routine response={response} page="generator"/>
+                        ) : (
+                            <></>
+                        )}
+                    </div>
+                    <button className="save-routine-button" onClick={saveRoutine}>Save Routine</button>
+                </div>
+            </div>
        </div>
     );
 }

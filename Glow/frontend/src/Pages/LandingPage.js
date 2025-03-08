@@ -13,8 +13,8 @@ export default function LandingPage() {
                 <img src={LandingPagePic} alt="Rippling water"/>
             </div>
             <div class="box text-box">
-                <h2>About Us</h2>
-                <p>Finding the perfect skincare routine can feel overwhelming, but we make it simple.
+                <h2 className="about-us">About Us</h2>
+                <p className="about-us-text">Finding the perfect skincare routine can feel overwhelming, but we make it simple.
                      GLOW tailors recommendations to your skin type, concerns, budget, and ingredient 
                      preferences—giving you a routine that truly works for you. Whether you're dealing 
                      with acne, dryness, sensitivity, or just looking to enhance your glow, we curate 

@@ -3,35 +3,40 @@ body {
     font-family: Arial, sans-serif;
   }
 
-  h2{
+  .saved-routines-header{
     color: #FF5E5E;
     font-size: 35px;
     font-weight: bold;
     text-align: left;
     padding-left: 3%;
     padding-top:0;
-    margin-top: 2%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
 
+  .button-link {
+    text-decoration: none;
   }
 
   .back-button {
+    font-weight: 800;
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
     color: rgb(255, 255, 255);
     border: 2px solid ;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
     transition: 0.3s;
     width: 250px;
     background-color: #FF5E5E;
     text-align: center;
     margin-left:3%;
-   
-    
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
   }
-  
-  .back-button:hover {
-    background: rgb(255, 255, 255) ;
-    color:#FF5E5E ;
+
+  .back-arrow {
+    margin-right: 5px;
   }
