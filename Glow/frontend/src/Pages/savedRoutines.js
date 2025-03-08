@@ -1,10 +1,47 @@
 import "./savedRoutines.css";
-import React from 'react';
 import Header from './Components/header';
 import Routine from './Components/routine';
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import renderRoutine from "./Components/routine_rendering.js"
 
 export default function SavedRoutines() {
+  const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+  const fetchRoutines = async () => {
+      try {
+          const res = await axios.post("http://127.0.0.1:8000/GetRoutine/");
+
+          let rawResponse = res.data.response;
+          console.log(rawResponse)
+  
+          // Extract actual JSON from response (removing triple backticks)
+          let jsonString = rawResponse.replace(/```json|```/g, "").trim();
+  
+          // Parse JSON
+          let parsedResponse = JSON.parse(jsonString);
+          console.log(parsedResponse);
+          
+          // Update state with parsed response
+          setResponse(parsedResponse);
+      } catch (error) {
+          console.error("Error fetching routine:", error);
+          setError(error)
+      }
+      setLoading(false);
+  }; 
+
+  useEffect(() => {
+      fetchRoutines();
+  }, []);
+
+  if (error) return <div>Failed to load routines.</div>;
+  if (loading) return <div>Loading routines...</div>;
+
     return(
        <div>
        <Header />
@@ -12,36 +49,8 @@ export default function SavedRoutines() {
        <a href="SkinCareGenerator">
             <button class="back-button"> ← Back to generator</button>
         </a>
-        <Routine
-        date="February 16, 2025"
-        dayProducts={[
-          { name: "Cleanser", price: 18 },
-          { name: "Toner", price: 22 },
-          { name: "Moisturizer", price: 30 },
-        ]}
-        nightProducts={[
-          { name: "Serum", price: 25 },
-          { name: "Eye Cream", price: 20 },
-          { name: "Night Cream", price: 35 },
-        ]}
-      /> 
+        <Routine renderRoutine={renderRoutine} response={response} />
 
-       <Routine
-        date="February 15, 2025"
-        dayProducts={[
-          { name: "Face Wash", price: 15 },
-          { name: "Vitamin C Serum", price: 28 },
-          { name: "SPF 50 Sunscreen", price: 18 },
-        ]}
-        nightProducts={[
-          { name: "Retinol Cream", price: 40 },
-          { name: "Hydrating Mask", price: 30 },
-          { name: "Lip Balm", price: 8 },
-        ]}
-      />    
-
-
-        
        </div>
     );
 }
