@@ -32,6 +32,21 @@
 	box-shadow: 2px 2px 4px var(--softBlack);
 }
 
+.response-container {
+	margin-top: 40px;
+}
+
+.save-routine-button {
+	background-color: #e74c3c;
+	border: none;
+	border-radius: 24px;
+	padding: 10px 40px;
+	font-weight: bold;
+	font-size: larger;
+	color: white;
+	margin-left: 20px;
+}
+
 @media only screen and (max-width: 500px){
 	.generator-container{
 		padding: 30px;

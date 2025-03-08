@@ -2,154 +2,52 @@ import React, { useState } from "react";
 import "./SkinForm.css"
 import Button from "./Button";
 
-export default function SkinForm() {
+export default function SkinForm({ onSubmit }) {
+	const [formData, setFormData] = useState({
+		skin_type: "Combination",
+		routine_type: "Day",
+		skin_concerns: [],
+		product_criteria: [],
+		allergies: "",
+		skin_conditions: "",
+		budget: "Medium",
+		min_price: "",
+		max_price: ""
+	});
 
-	// Routine Types ------------------------------------------------------------------------------------------------ //
-	const [selectedRoutine, setSelectedRoutine] = useState("");
+	const handleCheckboxChange = (e) => {
+        const { name, value, checked } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: checked
+                ? [...prev[name], value]
+                : prev[name].filter((v) => v !== value),
+        }));
+    };
 
-	const routineTypes = [
-		{ value: "morning", label: "Morning Routine" },
-		{ value: "evening", label: "Evening Routine" },
-		{ value: "morning and evening", label: "Morning & Evening Routine" },
-		{ value: "no preference", label: "No Preference" }
-	];
+	const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
 
-	// Skin Types --------------------------------------------------------------------------------------------------- //
-	const [selectedSkinType, setSelectedSkinType] = useState("");
-
-	const skinTypes = [
-		{ value: "normal", label: "Normal Skin" },
-		{ value: "aging", label: "Aging Skin" },
-		{ value: "combination", label: "Combination Skin" },
-		{ value: "dry", label: "Dry Skin" },
-		{ value: "oily", label: "Oily Skin" },
-		{ value: "sensitive", label: "Sensitive Skin" },
-	];
-
-	// Skin Conditions ---------------------------------------------------------------------------------------------- //
-	const [conditions, setConditions] = useState([]); // Store array of skin conditions
-
-	const handleConditionsChange = (event) => {
-		// Split input into an array based on commas, trim spaces, and remove empty values
-		const inputText = event.target.value;
-		const conditionArray = inputText
-			.split(",")
-			.map((condition) => condition.trim()) // Remove leading/trailing spaces
-			.filter((condition) => condition !== ""); // Remove empty values
-
-		setConditions(conditionArray);
-	};
-
-	// Allergies ---------------------------------------------------------------------------------------------------- //
-	const [allergies, setAllergies] = useState([]); // Store array of allergies
-
-	const handleAllergiesChange = (event) => {
-		// Split input into an array based on commas, trim spaces, and remove empty values
-		const inputText = event.target.value;
-		const allergyArray = inputText
-			.split(",")
-			.map((allergy) => allergy.trim()) // Remove leading/trailing spaces
-			.filter((allergy) => allergy !== ""); // Remove empty values
-
-		setAllergies(allergyArray);
-	};
-
-	// Skin Concerns ------------------------------------------------------------------------------------------------ //
-	const [selectedSkinConcerns, setSelectedSkinConcerns] = useState([]); // Store selected values
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		onSubmit(formData);
+	}
 
 	const skinConcerns = [
-		"Acne", "Aging", "Congested Skin", "Dark Circles Around Eyes", "Dehydrated",
-		"Enlarged Pores", "Hyperpigmentation", "Loss of Firmness", "Puffy Eyes",
-		"Redness", "Scarring", "Sensitive", "Sun Damage", "Textured", "Wrinkles"
+		"Acne", "Enlarged Pores", "Loss of Firmness", "Dark Circles", "Hyperpigmentation",
+        "Congested Skin", "Sun Damage", "Puffy Eyes", "Dehydrated", "Redness",
+        "Scarring", "Aging", "Textured", "Wrinkles", "Sensitive"
 	];
-
-	const handleSkinConcernsChange = (event) => {
-		const { value, checked } = event.target;
-		if (checked) {
-			setSelectedSkinConcerns([...selectedSkinConcerns, value]); // Add to selection
-		} else {
-			setSelectedSkinConcerns(selectedSkinConcerns.filter((concern) => concern !== value)); // Remove from selection
-		}
-	};
-
-	// Ingredient Preferences --------------------------------------------------------------------------------------- //
-	const [selectedIngredients, setSelectedIngredients] = useState([]); // Store selected values
 
 	const ingredientPreferences = [
-		"Alcohol-Free", "Dye-Free", "Essential Oil-Free", "Fragrance-Free",
-		"Paraben-Free", "Sulfate-Free"
+		"Fragrance-Free", "Alcohol-Free", "Paraben & Sulfate-free"
 	];
-
-	const handleIngredientPrefChange = (event) => {
-		const { value, checked } = event.target;
-		if (checked) {
-			setSelectedIngredients([...selectedIngredients, value]); // Add to selection
-		} else {
-			setSelectedIngredients(selectedIngredients.filter((ingredient) => ingredient !== value)); // Remove from selection
-		}
-	};
-
-	// Ethical & Sustainability Concerns ---------------------------------------------------------------------------- //
-	const [selectedESConcerns, setSelectedESConcerns] = useState([]); // Store selected values
 
 	const ethicalSustainabilityConcerns = [
-		"Cruelty-Free", "Eco-Friendly Packaging", "Sustainably Sourced", "Vegan"
+		"Cruelty Free", "Vegan", "Eco-Friendly Packaging", "Sustainable Sourcing"
 	];
-
-	const handleESConcernsChange = (event) => {
-		const { value, checked } = event.target;
-		if (checked) {
-			setSelectedESConcerns([...selectedESConcerns, value]); // Add to selection
-		} else {
-			setSelectedESConcerns(selectedESConcerns.filter((concern) => concern !== value)); // Remove from selection
-		}
-	};
-
-	// Budget, Price Min, & Price Max ------------------------------------------------------------------------------- //
-
-	// State for budget and price inputs
-	const [selectedBudget, setSelectedBudget] = useState("");
-	const [minPrice, setMinPrice] = useState("");
-	const [maxPrice, setMaxPrice] = useState("");
-
-	// Budget price mapping
-	const budgetRanges = {
-		low: { min: "10", max: "50" },
-		medium: { min: "51", max: "150" },
-		high: { min: "151", max: "500" },
-		"no-limit": { min: "", max: "" },
-	};
-
-	// Handle budget selection
-	const handleBudgetChange = (event) => {
-		const selected = event.target.value;
-		setSelectedBudget(selected);
-
-		// Auto-fill prices based on budget selection
-		if (budgetRanges[selected]) {
-			setMinPrice(budgetRanges[selected].min);
-			setMaxPrice(budgetRanges[selected].max);
-		} else {
-			setMinPrice("");
-			setMaxPrice("");
-		}
-	};
-
-	// Handle manual price input changes
-	const handleMinPriceChange = (event) => {
-		const inputValue = event.target.value.replace(/[^0-9.]/g, ""); // Allow only numbers
-		setMinPrice(inputValue);
-	};
-
-	const handleMaxPriceChange = (event) => {
-		const inputValue = event.target.value.replace(/[^0-9.]/g, ""); // Allow only numbers
-		setMaxPrice(inputValue);
-	};
-
-	// Submit Button ------------------------------------------------------------------------------------------------ //
-	const handleSubmitButtonClick = () => {
-		alert("Button Clicked!");
-	};
 
 	return (
 		<div>
@@ -161,16 +59,14 @@ export default function SkinForm() {
 					<div className="dropdown-container">
 						<select
 							className="generator-select"
+							name="routine_type"
 							id="routine-dropdown"
-							value={selectedRoutine}
-							onChange={(e) => setSelectedRoutine(e.target.value)}
+							value={formData.routine_type}
+							onChange={handleInputChange}
 						>
-							<option value="">Select</option>
-							{routineTypes.map((routine) => (
-								<option key={routine.value} value={routine.value}>
-									{routine.label}
-								</option>
-							))}
+							<option>Day</option>
+							<option>Night</option>
+							<option>Both</option>
 						</select>
 					</div>
 				</div>
@@ -179,17 +75,15 @@ export default function SkinForm() {
 					<div className="subTitle">Skin Type</div>
 					<div className="dropdown-container">
 						<select
+							name="skin_type"
 							className="generator-select"
 							id="skinType-dropdown"
-							value={selectedSkinType}
-							onChange={(e) => setSelectedSkinType(e.target.value)}
+							value={formData.skin_type}
+							onChange={handleInputChange}
 						>
-							<option value="">Select</option>
-							{skinTypes.map((skin) => (
-								<option key={skin.value} value={skin.value}>
-									{skin.label}
-								</option>
-							))}
+							<option>Combination</option>
+							<option>Oily</option>
+							<option>Dry</option>
 						</select>
 					</div>
 				</div>
@@ -199,16 +93,13 @@ export default function SkinForm() {
 					<div className="input-container">
 						<input
 							className="generator-input"
+							name="skin_conditions"
 							type="text"
 							id="skinConditions"
+							value={formData.skin_conditions}
 							placeholder="e.g., Acne, Eczema, Rosacea"
-							onChange={handleConditionsChange}
+							onChange={handleInputChange}
 						/>
-
-						{/* Display entered conditions dynamically */}
-						{conditions.length > 0 && (
-							<p>Conditions: {conditions.join(", ")}</p>
-						)}
 					</div>
 				</div>
 				{/* Allergies -------------------------------------------------------------------------------------- */}
@@ -217,16 +108,13 @@ export default function SkinForm() {
 					<div className="input-container">
 						<input
 							className="generator-input"
+							name="allergies"
 							type="text"
 							id="allergyInput"
+							value={formData.allergies}
 							placeholder="e.g., Nuts, Pollen, Dairy"
-							onChange={handleAllergiesChange}
+							onChange={handleInputChange}
 						/>
-
-						{/* Display entered allergies dynamically */}
-						{allergies.length > 0 && (
-							<p>Allergies: {allergies.join(", ")}</p>
-						)}
 					</div>
 				</div>
 				{/* Skin Concerns ---------------------------------------------------------------------------------- */}
@@ -238,18 +126,15 @@ export default function SkinForm() {
 								<label key={concern} className="checkbox-label">
 									<input
 										className="generator-input"
+										name="skin_concerns"
 										type="checkbox"
 										value={concern}
-										checked={selectedSkinConcerns.includes(concern)}
-										onChange={handleSkinConcernsChange}
+										onChange={handleCheckboxChange}
 									/>
 									{concern}
 								</label>
 							))}
 						</div>
-						{selectedSkinConcerns.length > 0 && (
-							<p className="selected-text">Selected: {selectedSkinConcerns.join(", ")}</p>
-						)}
 					</div>
 				</div>
 			</div>
@@ -265,18 +150,15 @@ export default function SkinForm() {
 								<label key={ingredient} className="checkbox-label">
 									<input
 										className="generator-input"
+										name="product_criteria"
 										type="checkbox"
 										value={ingredient}
-										checked={selectedIngredients.includes(ingredient)}
-										onChange={handleIngredientPrefChange}
+										onChange={handleCheckboxChange}
 									/>
 									{ingredient}
 								</label>
 							))}
 						</div>
-						{selectedIngredients.length > 0 && (
-							<p className="selected-text">Selected: {selectedIngredients.join(", ")}</p>
-						)}
 					</div>
 				</div>
 				{/* Ethical & Sustainability Concerns -------------------------------------------------------------- */}
@@ -288,30 +170,25 @@ export default function SkinForm() {
 								<label key={concern} className="checkbox-label">
 									<input
 										className="generator-input"
+										name="product_criteria"
 										type="checkbox"
 										value={concern}
-										checked={selectedESConcerns.includes(concern)}
-										onChange={handleESConcernsChange}
+										onChange={handleCheckboxChange}
 									/>
 									{concern}
 								</label>
 							))}
 						</div>
-						{selectedESConcerns.length > 0 && (
-							<p className="selected-text">Selected: {selectedESConcerns.join(", ")}</p>
-						)}
 					</div>
 				</div>
 				{/* Budget Dropdown -------------------------------------------------------------------------------- */}
 				<div className="item3-budget">
 					<div className="subTitle">Budget</div>
 					<div className="dropdown-container">
-						<select className="generator-select" id="budget-dropdown" value={selectedBudget} onChange={handleBudgetChange}>
-							<option value="">Select Budget</option>
-							<option value="low">Budget-Friendly ($ - $$)</option>
-							<option value="medium">Mid-Range ($$ - $$$)</option>
-							<option value="high">Luxury ($$$ - $$$$)</option>
-							<option value="no-limit">No Budget Limit</option>
+						<select className="generator-select" name="budget" id="budget-dropdown" value={formData.budget} onChange={handleInputChange}>
+							<option>Low</option>
+							<option>Medium</option>
+							<option>High</option>
 						</select>
 					</div>
 				</div>
@@ -322,11 +199,12 @@ export default function SkinForm() {
 					<div className="input-container" style={{width: 200}}>
 						<input
 							className="generator-input"
-							type="text"
+							name="min_price"
+							type="number"
 							id="priceMin"
 							placeholder="Enter minimum price"
-							value={minPrice}
-							onChange={handleMinPriceChange}
+							value={formData.min_price}
+							onChange={handleInputChange}
 						/>
 					</div>
 				</div>
@@ -337,18 +215,19 @@ export default function SkinForm() {
 					<div className="input-container" style={{width: 200}}>
 						<input
 							className="generator-input"
-							type="text"
+							name="max_price"
+							type="number"
 							id="priceMax"
 							placeholder="Enter maximum price"
-							value={maxPrice}
-							onChange={handleMaxPriceChange}
+							value={formData.max_price}
+							onChange={handleInputChange}
 						/>
 					</div>
 				</div>
 			</div>
 
 			<div className="buttonContainer">
-				<Button text="Generate Routine" onClick={handleSubmitButtonClick}/>
+				<Button text="Generate Routine" onClick={handleSubmit}/>
 			</div>
 
 		</div>
