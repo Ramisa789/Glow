@@ -1,5 +1,6 @@
 import "./SignUp.css";
 import Header from './Components/header';
+import LoginSignUpGraphic from './Components/LoginSignUpGraphic';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
@@ -50,9 +51,7 @@ export default function SignUp() {
         <body> 
         <Header />      
         <div className="layout">
-            <div className="image-box">
-                <img src= {SignUpGraphic} alt="Strawberry themed graphics on top of a pink face mask" ></img>
-            </div>
+            <LoginSignUpGraphic />
             <div className = "form-box">
                 <h1>Welcome!</h1>
                 <p className="signup-prompt">Sign up for Glow to save your skincare routines with ease</p>
