@@ -12,3 +12,9 @@
     height: 730px;
     max-width:95%;
 }
+
+@media screen and (max-width: 1200px) {
+    .image-box {
+        display: none;
+    }
+}
