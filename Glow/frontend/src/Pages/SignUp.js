@@ -9,7 +9,7 @@ export default function SignUp() {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
-        confirmPassword: ""
+        confirm_password: ""
     });
 
     const [error, setError] = useState("");
@@ -20,13 +20,12 @@ export default function SignUp() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // reset previous message
         setError("");
         setSuccess("");
 
-        if (formData.password !== formData.confirmPassword) {
+        if (formData.password !== formData.confirm_password) {
             setError("Passwords do not match.");
             return;
         }
@@ -35,12 +34,11 @@ export default function SignUp() {
             const response = await axios.post("http://127.0.0.1:8000/signup/", {
                 username: formData.username,
                 password: formData.password,
-                confirm_password: formData.confirmPassword,
+                confirm_password: formData.confirm_password,
             });
 
             setSuccess(response.data.message);
-            // Redirect to generator after successful signup
-            navigate('/skincaregenerator')
+            navigate('/skincaregenerator');
         } catch (err) {
             setError(err.response?.data?.error || "Signup failed.");
         }
