@@ -1,4 +1,6 @@
-import "./Login.css";
+import "./LoginSignUp.css";
+import Header from './Components/header';
+import LoginSignUpGraphic from './Components/LoginSignUpGraphic';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -25,24 +27,40 @@ export default function Login() {
     };
 
     return(
-       <div>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Login</button>
-            <p>{message}</p>
-        </form>
+        <body>
+        <Header/>
+       <div className="layout">
+            <LoginSignUpGraphic />
+            <div className="form-box">
+                <h1>Welcome Back!</h1>
+                <br />
+                <br />
+                <form onSubmit={handleSubmit}>
+                    <input
+                        className="user-input"
+                        type="email"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <br />
+                    <input
+                        className="user-input"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <br />
+                    <button className="button" type="submit">Login</button>
+                    {/* <p>{message}</p>  */}
+                    <p className="error-text">Incorrect Credentials! Please try again</p>
+                    <p className="switch-page-prompt">Don't have an account? <a  className="switch-page-text"href= "SignUp">Sign-up here</a></p>
+                    <div class="line-text">OR</div>
+                <a  className= "button" href = "SkinCareGenerator">Continue as Guest</a>
+                </form>
+            </div>
        </div>
+       </body>
     );
 }
