@@ -1,6 +1,6 @@
-import "./LoginSignUp.css";
+import "./Credentials.css";
 import Header from './Components/header';
-import LoginSignUpGraphic from './Components/LoginSignUpGraphic';
+import CredentialsGraphic from './Components/CredentialsGraphic';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -45,11 +45,11 @@ export default function SignUp() {
     };
 
     return(
-        <body> 
+        <body className="credentials-body"> 
         <Header />      
-        <div className="layout">
-            <LoginSignUpGraphic />
-            <div className = "form-box">
+        <div className="credentials-layout">
+            <CredentialsGraphic />
+            <div className = "credentials-form-box">
                 <div>
                     <h1>Welcome!</h1>
                     <p className="signup-prompt">Sign up for Glow to save your skincare routines with ease</p>
@@ -58,12 +58,12 @@ export default function SignUp() {
                     <input className = "user-input" type="email" id="user_email" placeholder="Username" onChange={handleInput} required></input> <br />
                     <input className = "user-input" type="password" id="user_password" placeholder="Password" onChange={handleInput} required></input><br />
                     <input className = "user-input" type="password" id="user_confirm_password" placeholder="Re-enter Password" onChange={handleInput} required></input><br />
-                    <input className = "button" type="submit" value="Sign Up" /> 
+                    <input className = "credentials-button" type="submit" value="Sign Up" /> 
                 <div>
                 <p className="error-text">Passwords do not match!</p>
-                <p className="switch-page-prompt">Already have an account? <a  className="switch-page-text"href= "Login">Login here</a></p></div>
+                <p className="switch-page-prompt">Already have an account? <a  className="switch-page-text" href= "Login">Login here</a></p></div>
                 <div class="line-text">OR</div>
-                <a  className= "button" href = "SkinCareGenerator">Continue as Guest</a>
+                <a  className= "credentials-button" href = "SkinCareGenerator">Continue as Guest</a>
             </form>
             </div>
         </div>
