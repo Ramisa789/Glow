@@ -12,22 +12,9 @@ body {
     justify-content: space-between;
 }
 
-.image-box {
-    display: flex;
-    flex: 0 0 60%;
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-}
-
-.image-box img{
-    border-radius: 20px;
-    width: 100%;
-    height: 730px;
-    max-width:95%;
-}
-
 .form-box{
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 40%;
@@ -38,8 +25,6 @@ body {
     border-radius: 25px;
     color: #FF5252;
     text-align: center;
-    margin: 0;
-    padding: 0;
 }
 
 .form-box h1{
@@ -104,7 +89,7 @@ body {
     margin-top: 2px;
 }
 
-.login-text{
+.switch-page-text{
     font-weight: bold;
     color: #FF5252;
     text-decoration: none;
@@ -112,7 +97,7 @@ body {
     
 }
 
-.login-prompt {
+.switch-page-prompt {
     font-size: 20px;
 }
 
@@ -132,7 +117,6 @@ body {
     flex: 1;
     height: 2px;
     background-color: #FF5252;
-    margin-left: 20%;
     margin-right: 20px;
 }
 
@@ -142,14 +126,9 @@ body {
     height: 2px;
     background-color: #FF5252;
     margin-left: 20px;
-    margin-right: 20%;
 }
 
 @media screen and (max-width: 1200px) {
-    .image-box {
-        display: none;
-    }
-
     .layout {
         justify-content: center;
     }
