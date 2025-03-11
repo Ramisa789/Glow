@@ -125,7 +125,11 @@ export default function SkinCareGenerator() {
                     <div className="formContainer"><SkinForm onSubmit={handleSubmit} /></div>
                     <div className="response-container">
                         {response ? (
-                            <Routine response={response} page="generator"/>
+                            <Routine 
+                                day={response.day}
+                                night={response.night}
+                                page="generator"
+                            />
                         ) : (
                             <></>
                         )}

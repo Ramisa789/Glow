@@ -92,50 +92,86 @@ def save_routine_table(user, routine_time, products):
 
 @api_view(['POST'])
 def save_routine(request):
-    print("debugging print statment for this url")
+    print("Debugging: Save Routine endpoint hit.")
 
-    user = User.objects.first()  # Change this to the actual user instance
+    user = User.objects.first()
+    if not user.is_authenticated:
+        return JsonResponse({"error": "Authentication required."}, status=401)
+
     data = request.data
+    if not isinstance(data, dict):
+        return JsonResponse({"error": "Invalid JSON format"}, status=400)
 
-    # Get list of database values for routine time choices
-    routine_times = [choice[0] for choice in Routine._meta.get_field("time_of_day").choices]
+    try:
+        # Create a named routine for the user
+        routine = Routine.objects.create(user=user, name="My Routine")
 
-    for routine_time in data:
-        if routine_time not in routine_times:
-            print("Invalid routine time.")
-            return JsonResponse({"error": "Invalid JSON format"}, status=400)
-        
-        save_routine_table(user, routine_time, data[routine_time])
-        
+        for time_of_day, products in data.items():
+            if time_of_day not in ["day", "night"]:
+                return JsonResponse({"error": f"Invalid routine time: {time_of_day}"}, status=400)
 
+            for step in products:
+                product_name = step.get("name")
+                price = step.get("price")
+                step_number = step.get("step")
+                instructions = step.get("application", "N/A")
 
-    return JsonResponse({"message": "Routines saved successfully!"}, status=200)
+                if not product_name or not step_number:
+                    return JsonResponse({"error": "Missing required product details."}, status=400)
+
+                # Fetch or create product
+                product, _ = Product.objects.get_or_create(name=product_name, defaults={"price": price})
+
+                # Create RoutineProduct step
+                RoutineProduct.objects.create(
+                    routine=routine,
+                    product=product,
+                    step_number=step_number,
+                    instructions=instructions,
+                    time_of_day=time_of_day
+                )
+
+        return JsonResponse({"message": "Routine saved successfully!"}, status=201)
+
+    except Exception as e:
+        print("Error saving routine:", str(e))
+        return JsonResponse({"error": "Failed to save routine. Please try again."}, status=500)
 
 
 @api_view(["POST"])
 def get_routine(request):
-    # Use actual user id for getting routine
+    # Use actual authenticated user instead of first user
     user = User.objects.first()
 
     routines = Routine.objects.filter(user=user)
-    routine_data = dict()
+    routine_list = []
 
     for routine in routines:
+        routine_data = {
+            "name": routine.name,
+            "created_at": routine.created_at.strftime("%B %d, %Y"),
+            "day": [],
+            "night": [],
+        }
+
         routine_products = RoutineProduct.objects.filter(routine=routine)
 
-        routine_product_data = []
-
-        for routine_product in routine_products:
+        for rp in routine_products:
             product_data = {
-                "step": routine_product.id,  # or use routine_product's specific step value
-                "name": routine_product.product.name,
-                "price": str(routine_product.product.price),  # Convert to string to match the JSON format
-                "application": routine_product.instructions
+                "step": rp.step_number,  # Use step_number for proper ordering
+                "name": rp.product.name,
+                "price": str(rp.product.price),  # Convert Decimal to string
+                "application": rp.instructions,
             }
+            if rp.time_of_day == "day":
+                routine_data["day"].append(product_data)
+            else:
+                routine_data["night"].append(product_data)
 
-            routine_product_data.append(product_data)
-        
-        routine_data[routine.time_of_day] = routine_product_data
+        # Sort steps properly within each routine time
+        routine_data["day"].sort(key=lambda x: x["step"])
+        routine_data["night"].sort(key=lambda x: x["step"])
 
-    return JsonResponse({"response" : json.dumps(routine_data)})
-    
+        routine_list.append(routine_data)
+
+    return JsonResponse({"response": routine_list}, safe=False)
