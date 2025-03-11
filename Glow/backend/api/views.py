@@ -23,7 +23,7 @@ def signup(request):
             confirm_password = data.get("confirm_password")
 
             if not username or not password or not confirm_password:
-                return JsonResponse({"error:" "All fields are required."}, status=400)
+                return JsonResponse({"error": "All fields are required."}, status=400)
             
             if password != confirm_password:
                 return JsonResponse({"error": "Passwords do not match."}, status=400)

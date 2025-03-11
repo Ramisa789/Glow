@@ -1,9 +1,9 @@
-import "./SignUp.css";
+import "./Credentials.css";
 import Header from './Components/header';
+import CredentialsGraphic from './Components/CredentialsGraphic';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import SignUpGraphic from "./Images/LoginSignUpGraphic.png";
 
 export default function SignUp() {
     const [formData, setFormData] = useState({
@@ -44,32 +44,29 @@ export default function SignUp() {
         }
     };
 
-    return (
-        <div className="signup-body"> 
-            <Header />      
-            <div className="signup-layout">
-                <div className="signup-image-box">
-                    <img src={SignUpGraphic} alt="Strawberry themed graphics on top of a pink face mask" />
-                </div>
-                <div className="signup-form-box">
+    return(
+        <div className="credentials-body"> 
+        <Header />      
+        <div className="credentials-layout">
+            <CredentialsGraphic />
+            <div className = "credentials-form-box">
+                <div>
                     <h1>Welcome!</h1>
                     <p className="signup-prompt">Sign up for Glow to save your skincare routines with ease</p>
-                    
-                    <form onSubmit={handleSubmit}>  
-                        <input className="user-input" type="text" name="username" placeholder="Username" onChange={handleInput} required /><br/>
-                        <input className="user-input" type="password" name="password" placeholder="Password" onChange={handleInput} required /><br/>
-                        <input className="user-input" type="password" name="confirm_password" placeholder="Re-enter Password" onChange={handleInput} required /><br/>
-                        <button className="signup-button" type="submit">Sign Up</button>
-                    </form>
-
-                    <p className="error-text">{error}</p>
-                    <p className="login-prompt">
-                        Already have an account? <a className="login-text" href="Login">Login here</a>
-                    </p>
-                    <div className="line-text">OR</div>
-                    <a className="signup-button" href="SkinCareGenerator">Continue as Guest</a>
                 </div>
+                <form onSubmit={handleSubmit}>  
+                    <input className="user-input" type="text" name="username" placeholder="Username" onChange={handleInput} required /><br/>
+                    <input className="user-input" type="password" name="password" placeholder="Password" onChange={handleInput} required /><br/>
+                    <input className="user-input" type="password" name="confirm_password" placeholder="Re-enter Password" onChange={handleInput} required /><br/>
+                    <button className="credentials-button" type="submit">Sign Up</button>
+                <div>
+                <p className="error-text">{error}</p>
+                <p className="switch-page-prompt">Already have an account? <a  className="switch-page-text" href= "Login">Login here</a></p></div>
+                <div class="line-text">OR</div>
+                <a  className= "credentials-button" href = "SkinCareGenerator">Continue as Guest</a>
+            </form>
             </div>
+        </div>
         </div>
     );
 }

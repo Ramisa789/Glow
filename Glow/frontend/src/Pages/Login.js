@@ -1,6 +1,8 @@
-import "./Login.css";
+import "./Credentials.css";
+import Header from './Components/header';
+import CredentialsGraphic from './Components/CredentialsGraphic';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Login() {
@@ -25,24 +27,39 @@ export default function Login() {
     };
 
     return(
-       <div>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Login</button>
-            <p>{message}</p>
-        </form>
+        <div>
+        <Header/>
+       <div className="credentials-layout">
+            <CredentialsGraphic />
+            <div className="credentials-form-box">
+                <h1>Welcome Back!</h1>
+                <br />
+                <br />
+                <form onSubmit={handleSubmit}>
+                    <input
+                        className="user-input"
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <br />
+                    <input
+                        className="user-input"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <br />
+                    <button className="credentials-button" type="submit">Login</button>
+                    <p className="error-text">{message}</p>
+                    <p className="switch-page-prompt">Don't have an account? <a  className="switch-page-text"href= "SignUp">Sign-up here</a></p>
+                    <div class="line-text">OR</div>
+                    <a  className= "credentials-button" href = "SkinCareGenerator">Continue as Guest</a>
+                </form>
+            </div>
+       </div>
        </div>
     );
 }
