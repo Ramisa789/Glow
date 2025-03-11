@@ -15,7 +15,8 @@
 
   .back-button {
     font-weight: 800;
-    display: inline-block;
+    padding: 10px 0;
+    display: flex;
     font-size: 15px;
     color: rgb(255, 255, 255);
     border: 2px solid ;
@@ -37,11 +38,77 @@
     color:#FF5E5E;
   }
 
-  .back-arrow {
-    margin-right: 10px;
-  }
-
   .routine-width {
     width: 98%;
     margin: auto;
+    margin-bottom: 50px;
+  }
+
+  .loading-container {
+    color: var(--redDark);
+    font-size: 25px;
+    font-style: italic;
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    height: 60vh;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--redLight);
+    border-top-color: var(--redDark);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  .no-routines-container {
+    text-align: center;
+    color: var(--redDark);
+    background-color: rgb(255, 240, 240);
+    border: 2px solid var(--redDark);
+    border-radius: 12px;
+    padding: 200px 20px;
+    width: 91%;
+    margin-left:3%;
+    margin-right:2%;
+    flex-wrap:nowrap;
+    margin: 0 auto;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon-container {
+    margin-bottom: 10px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @media only screen and (max-width: 700px){
+    .saved-routines-header {
+      font-size: 30px;
+      margin-left: 25px;
+    }
+
+    .back-button {
+      font-size: 13px;
+      margin-left: 35px;
+    }
+
+    .no-routines-container {
+      width: 80%;
+      font-size: 25px;
+    }
   }

@@ -4,6 +4,7 @@ import Routine from './Components/routine';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import noneSavedIcon from './Images/no-saved-icon.svg';
 
 export default function SavedRoutines() {
   const [routines, setRoutines] = useState([]);
@@ -26,34 +27,44 @@ export default function SavedRoutines() {
   }, []);
 
   if (error) return <div>Failed to load routines.</div>;
-  if (loading) return <div>Loading routines...</div>;
 
   return (
     <div>
       <Header />
       <div className="routine-width">
-        <h2 className="saved-routines-header"> My Saved Routines </h2>
+        <h2 className="saved-routines-header">My Saved Routines</h2>
         <a className="button-link" href="SkinCareGenerator">
           <button className="back-button">
-            <p className="back-arrow">←</p> Back to generator
+            ← Back to generator
           </button>
         </a>
-
-        <div>
-          {routines.length > 0 ? (
-            routines.map((routine, index) => (
-              <Routine
-                key={index}
-                created_at={routine.created_at}
-                day={routine.day}
-                night={routine.night}
-                page="profile"
-              />
-            ))
-          ) : (
-            <p>No saved routines found.</p>
-          )}
-        </div>
+  
+        {/* Loading message appears here below the header */}
+        {loading ? (
+          <div className="loading-container">
+            <div className="spinner"></div>
+            <p>Loading routines...</p>
+          </div>
+        ) : (
+          <div>
+            {routines.length > 0 ? (
+              routines.map((routine, index) => (
+                <Routine
+                  key={index}
+                  created_at={routine.created_at}
+                  day={routine.day}
+                  night={routine.night}
+                  page="profile"
+                />
+              ))
+            ) : (
+                <div className="no-routines-container">
+                    <img className="icon-container" src={noneSavedIcon} height={30} width={30} alt="no routines saved icon" />
+                    No saved routines.
+                </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
