@@ -2,7 +2,7 @@ import "./Credentials.css";
 import Header from './Components/header';
 import CredentialsGraphic from './Components/CredentialsGraphic';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Login() {
@@ -27,7 +27,7 @@ export default function Login() {
     };
 
     return(
-        <body>
+        <div>
         <Header/>
        <div className="credentials-layout">
             <CredentialsGraphic />
@@ -38,7 +38,7 @@ export default function Login() {
                 <form onSubmit={handleSubmit}>
                     <input
                         className="user-input"
-                        type="email"
+                        type="text"
                         placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -53,14 +53,13 @@ export default function Login() {
                     />
                     <br />
                     <button className="credentials-button" type="submit">Login</button>
-                    {/* <p>{message}</p>  */}
-                    <p className="error-text">Incorrect Credentials! Please try again</p>
+                    <p className="error-text">{message}</p>
                     <p className="switch-page-prompt">Don't have an account? <a  className="switch-page-text"href= "SignUp">Sign-up here</a></p>
                     <div class="line-text">OR</div>
-                <a  className= "credentials-button" href = "SkinCareGenerator">Continue as Guest</a>
+                    <a  className= "credentials-button" href = "SkinCareGenerator">Continue as Guest</a>
                 </form>
             </div>
        </div>
-       </body>
+       </div>
     );
 }

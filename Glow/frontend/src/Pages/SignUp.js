@@ -45,7 +45,7 @@ export default function SignUp() {
     };
 
     return(
-        <body className="credentials-body"> 
+        <div className="credentials-body"> 
         <Header />      
         <div className="credentials-layout">
             <CredentialsGraphic />
@@ -54,19 +54,19 @@ export default function SignUp() {
                     <h1>Welcome!</h1>
                     <p className="signup-prompt">Sign up for Glow to save your skincare routines with ease</p>
                 </div>
-                <form>  
-                    <input className = "user-input" type="email" id="user_email" placeholder="Username" onChange={handleInput} required></input> <br />
-                    <input className = "user-input" type="password" id="user_password" placeholder="Password" onChange={handleInput} required></input><br />
-                    <input className = "user-input" type="password" id="user_confirm_password" placeholder="Re-enter Password" onChange={handleInput} required></input><br />
-                    <input className = "credentials-button" type="submit" value="Sign Up" /> 
+                <form onSubmit={handleSubmit}>  
+                    <input className="user-input" type="text" name="username" placeholder="Username" onChange={handleInput} required /><br/>
+                    <input className="user-input" type="password" name="password" placeholder="Password" onChange={handleInput} required /><br/>
+                    <input className="user-input" type="password" name="confirm_password" placeholder="Re-enter Password" onChange={handleInput} required /><br/>
+                    <button className="credentials-button" type="submit">Sign Up</button>
                 <div>
-                <p className="error-text">Passwords do not match!</p>
+                <p className="error-text">{error}</p>
                 <p className="switch-page-prompt">Already have an account? <a  className="switch-page-text" href= "Login">Login here</a></p></div>
                 <div class="line-text">OR</div>
                 <a  className= "credentials-button" href = "SkinCareGenerator">Continue as Guest</a>
             </form>
             </div>
         </div>
-        </body>
+        </div>
     );
 }
