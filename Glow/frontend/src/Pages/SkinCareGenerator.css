@@ -17,7 +17,7 @@
 	font: 800 20px var(--fontTitle);
 	color: var(--greenDark);
 	padding: 10px 30px;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 	border: 2px solid var(--greenDark);
 	border-radius: 30px;
 }
@@ -30,6 +30,37 @@
 	margin: auto;
 	border-radius: 20px;
 	box-shadow: 2px 2px 4px var(--softBlack);
+}
+
+.response-container {
+	margin-top: 40px;
+}
+
+.save-routine-button {
+	background-color: var(--redDark);
+	border: 2px solid ;
+	border-radius: 24px;
+	padding: 10px 40px;
+	font-weight: bold;
+	font-size: larger;
+	color: white;
+	margin-left: 20px;
+}
+
+.save-routine-button:hover {
+    background: rgb(255, 255, 255) ;
+    color:#FF5E5E ;
+  }
+
+.save-button-container {
+	display: flex;
+	align-items: center;
+}
+
+.save-message {
+	color: var(--redDark);
+	margin-left: 10px;
+	font-style: italic;
 }
 
 @media only screen and (max-width: 500px){
