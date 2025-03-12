@@ -20,6 +20,7 @@ export default function Login() {
                 setMessage(response.data.message);
                 // Redirect on successful login
                 if (response.data.message === "Login successful!") {
+                    localStorage.setItem('authToken', response.data.token);
                     navigate('/skincaregenerator');
                 }
             })

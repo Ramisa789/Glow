@@ -38,6 +38,7 @@ export default function SignUp() {
             });
 
             setSuccess(response.data.message);
+            localStorage.setItem('authToken', response.data.token);
             navigate('/skincaregenerator');
         } catch (err) {
             setError(err.response?.data?.error || "Signup failed.");

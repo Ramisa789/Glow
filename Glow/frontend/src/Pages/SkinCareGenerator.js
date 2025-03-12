@@ -1,6 +1,6 @@
 import "./SkinCareGenerator.css";
 import "../CSSVariables.css"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
 import SkinForm from "./Components/SkinForm";
@@ -10,6 +10,12 @@ import Header from "./Components/header";
 export default function SkinCareGenerator() {
     const [response, setResponse] = useState("");
     const [saveStatus, setSaveStatus] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        setIsAuthenticated(!!token);
+    }, []);
 
     const handleSubmit = async (formData) => {
         // Construct the prompt for Gemini based on form data  
@@ -135,7 +141,10 @@ export default function SkinCareGenerator() {
                         )}
                     </div>
                     <div className="save-button-container">
-                        <button className="save-routine-button" onClick={saveRoutine}>Save Routine</button>
+                        {isAuthenticated && response && (
+                            <button className="save-routine-button" onClick={saveRoutine}>Save Routine</button>
+                        )}
+                        
                         {saveStatus && (
                             <div className={`save-message ${saveStatus.success ? "success" : "error"}`}>
                                 {saveStatus.message}
