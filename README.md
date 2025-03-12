@@ -30,6 +30,8 @@ Install the required dependencies:
 pip install django psycopg2 django-cors-headers
 pip install google-generativeai
 pip install djangorestframework
+pip install django-allauth
+pip install dj-rest-auth
 ```
 
 ## Step 2: Setup Environment Variables
