@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 import google.generativeai as genai
 from django.conf import settings
 import json
@@ -32,7 +33,10 @@ def signup(request):
                 return JsonResponse({"error": "Username already taken."}, status=400)
             
             user = User.objects.create_user(username=username, password=password)
-            return JsonResponse({"message": "User created successfully!"}, status=201)
+            login(request, user)
+
+            token, created = Token.objects.get_or_create(user=user)
+            return JsonResponse({"message": "User created successfully!", "token": token.key}, status=201)
         
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid data."}, status=400)
@@ -48,8 +52,8 @@ def user_login(request):
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return JsonResponse({"message": "Login successful!"}, status=200)
+            token, created = Token.objects.get_or_create(user=user)
+            return JsonResponse({"message": "Login successful!", "token": token.key}, status=200)
         else:
             return JsonResponse({"message": "Invalid credentials!"}, status=400)
         
