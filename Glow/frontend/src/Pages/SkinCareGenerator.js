@@ -89,7 +89,7 @@ export default function SkinCareGenerator() {
 
 
         try {
-            const res = await axios.post("http://127.0.0.1:8000/LLMTest/", { prompt });
+            const res = await axios.post("http://127.0.0.1:8000/generate/", { prompt });
             let rawResponse = res.data.response;
             console.log(rawResponse)
     
@@ -111,11 +111,24 @@ export default function SkinCareGenerator() {
         try {
             if (!response || typeof response !== "object") throw new Error("No response.");
 
-            const res = await axios.post("http://127.0.0.1:8000/SaveRoutine/", response);
-            let rawResponse = res.data.response;
-            console.log(rawResponse)
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                setSaveStatus({ success: false, message: "Authentication required. Please log in." });
+                return;
+            }
 
-            setSaveStatus({ success: true, message: "Routine saved successfully!" });
+            const res = await axios.post(
+                "http://127.0.0.1:8000/SaveRoutine/",
+                response,
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+
+            setSaveStatus({ success: true, message: res.data.message });
         } catch (error) {
             console.error("Error saving routine:", error);
             setSaveStatus({ success: false, message: "Failed to save routine. Please try again." });

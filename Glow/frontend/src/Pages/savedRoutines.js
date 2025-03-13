@@ -12,19 +12,35 @@ export default function SavedRoutines() {
   const [error, setError] = useState(null);
   const navigate = useNavigate()
 
-  const isAuthenticated = localStorage.getItem('authToken');
-
   useEffect(() => {
-    if(!isAuthenticated) {
-      navigate('/login');
-    } else {
-      fetchRoutines();
-    }
-  }, [isAuthenticated, navigate])
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+          navigate('/login');
+      } else {
+          fetchRoutines();
+      }
+  }, [navigate]);
 
   const fetchRoutines = async () => {
     try {
-      const res = await axios.post("http://127.0.0.1:8000/GetRoutine/");
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        setError("Authentication required. Please log in.");
+            setLoading(false);
+            return;
+      }
+
+      const res = await axios.post(
+        "http://127.0.0.1:8000/GetRoutine/",
+        {},
+        {
+            headers: {
+                Authorization: `Token ${token}`,
+                "Content-Type": "application/json",
+            },
+        }
+      );
+
       setRoutines(res.data.response); // Directly use the response as an array
     } catch (error) {
       console.error("Error fetching routines:", error);

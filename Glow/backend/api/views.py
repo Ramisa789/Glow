@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
+from rest_framework.decorators import authentication_classes, permission_classes
 import google.generativeai as genai
 from django.conf import settings
 import json
@@ -63,6 +64,8 @@ def user_login(request):
 genai.configure(api_key=settings.GEMINI_API_KEY)
 
 @api_view(['POST'])
+@authentication_classes([])  # Allow unauthenticated access
+@permission_classes([])  # No permission restrictions
 def generate_response(request):
     print("debugging print statment for this url")
     user_input = request.data.get("prompt", "")
@@ -98,7 +101,7 @@ def save_routine_table(user, routine_time, products):
 def save_routine(request):
     print("Debugging: Save Routine endpoint hit.")
 
-    user = User.objects.first()
+    user = request.user
     if not user.is_authenticated:
         return JsonResponse({"error": "Authentication required."}, status=401)
 
@@ -144,8 +147,10 @@ def save_routine(request):
 
 @api_view(["POST"])
 def get_routine(request):
-    # Use actual authenticated user instead of first user
-    user = User.objects.first()
+
+    user = request.user  # Get the authenticated user
+    if not user.is_authenticated:
+        return JsonResponse({"error": "Authentication required."}, status=401)
 
     routines = Routine.objects.filter(user=user)
     routine_list = []
