@@ -1,4 +1,4 @@
-# Devlopment Setup (backend connection)
+# Development Setup (backend connection)
 
 Use this website to help get started: https://stackpython.medium.com/how-to-start-django-project-with-a-database-postgresql-aaa1d74659d8
 
@@ -99,4 +99,3 @@ python manage.py runserver
 npm start
 ```
 
-You should see "Hello from Django!" displayed on the React frontend.
