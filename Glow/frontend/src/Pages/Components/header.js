@@ -24,7 +24,7 @@ function Header() {
         <div className="header">
             <div className='header-logo-container'>
                 <img src={logo} alt="Logo" height={40} width={40} className="logo" />
-                <span className="text"><b>GLOW.</b></span>
+                <a href="/" className="text"><b>GLOW.</b></a>
             </div>
             {isAuthenticated && (
                 <div className="authed-user-icons">
