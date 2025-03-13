@@ -2,7 +2,7 @@ import "./Credentials.css";
 import Header from './Components/header';
 import CredentialsGraphic from './Components/CredentialsGraphic';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function SignUp() {
