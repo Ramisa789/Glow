@@ -36,7 +36,7 @@ urlpatterns = [
     path('', home, name='home'),  
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
-    path('LLMTest/', generate_response, name='generate_response'),
+    path('generate/', generate_response, name='generate_response'),
     path('SaveRoutine/', save_routine, name='save_routine'),
     path('GetRoutine/', get_routine, name='get_routine')
 ]

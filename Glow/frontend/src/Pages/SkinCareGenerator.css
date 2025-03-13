@@ -65,7 +65,7 @@
 
 @media only screen and (max-width: 500px){
 	.generator-container{
-		padding: 30px;
+		padding: 40px;
 	}
 
 	.generator-header{
@@ -74,6 +74,10 @@
 
 	.formContainer {
 		padding: 30px;
+	}
+
+	.credentials-header {
+		font-size: 30px;
 	}
 }
 
