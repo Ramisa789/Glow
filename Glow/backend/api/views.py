@@ -62,6 +62,79 @@ def user_login(request):
     return JsonResponse({"message": "Login successful!", "token": token.key}, status=HTTPStatus.OK)
 
 
+def generate_query(formData):
+    # Construct the prompt for Gemini based on form data  
+    prompt = '''  
+    Based on the user's selections, generate a personalized skincare routine.  
+
+    ### User Selections:
+    - Skin Type: {skin_type}
+    - Routine Type: {routine_type}
+    - Skin Concerns: {skin_concerns}
+    - Product Criteria: {product_criteria}
+    - Allergies: {allergies}
+    - Skin Conditions: {skin_conditions}
+    - Budget: {budget}
+    - Price Range: {min_price} - {max_price}
+    '''.format(skin_type = formData["skin_type"], routine_type = formData["routine_type"], skin_concerns = formData["skin_concerns"], product_criteria = formData["product_criteria"], allergies = formData["allergies"], skin_conditions = formData["skin_conditions"], budget = formData["budget"],  min_price = formData["min_price"], max_price = formData["max_price"])
+    
+    prompt += '''### Expected JSON Format:  
+    Return the routine **strictly** in this format:  
+    {
+    "day": [
+        {
+        "step": 1,
+        "name": "Prudct name",
+        "price": "$17.99",
+        "application": "steps on how to apply"
+        },
+        {
+        "step": 2,
+        "name": "Product name",
+        "price": "$25.00",
+        "application": "steps on how to apply"
+        },
+        {
+        "step": 3,
+        "name": "Product name",
+        "price": "$6.00",
+        "application": "steps on how to apply"
+        }
+    ],
+    "night": [
+        {
+        "step": 1,
+        "name": "Product name",
+        "price": "$17.99",
+        "application": "steps on how to apply"
+        },
+        {
+        "step": 2,
+        "name": "Product name",
+        "price": "$25.00",
+        "application": "steps on how to apply"
+        },
+        {
+        "step": 3,
+        "name": "The Ordinary Niacinamide 10% + Zinc 1%",
+        "price": "$6.00",
+        "application": "steps on how to apply"
+        }
+    ]
+    }
+
+    ### Constraints:  
+    - **Follow the exact JSON structure** provided above.  
+    - **Use the same field names** ("day routine" and "night routine") with lowercase keys.  
+    - Each routine must be an **array of objects** with: "step", "name", "price", and "application".
+    - If the routine type is only "Day", return an empty array for "night routine" and vice versa. If the routine type is both, provide for both day and night.
+    - Do **not** include any extra text, explanations, or formatting outside the JSON response.  
+    - The string held in the application field currently with placeholder "steps on how to apply" should be no longer than 400 characters.
+    - Do **not** include dollar signs on any price fields.
+    '''
+
+    return prompt
+
 genai.configure(api_key=settings.GEMINI_API_KEY)
 
 @api_view(['POST'])
@@ -69,11 +142,18 @@ genai.configure(api_key=settings.GEMINI_API_KEY)
 @permission_classes([])  # No permission restrictions
 def generate_response(request):
     print("debugging print statment for this url")
-    user_input = request.data.get("prompt", "")
     model = genai.GenerativeModel("gemini-2.0-flash")
-    response = model.generate_content(user_input)
-    
-    return Response({"response": response.text})
+    try:
+        query = generate_query(request.data['formData'])
+        response = model.generate_content(query)
+        # Extract actual JSON from response (removing triple backticks)
+        jsonResponse = str(response.text).replace('```json', "").replace('```', "")
+        jsonResponse  = jsonResponse.rstrip(' \t\n\r').lstrip(' \t\n\r')
+    except Exception as e:
+        print("Error saving routine:", str(e))
+        return JsonResponse({"error": "Failed to save routine. Please try again."}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+
+    return JsonResponse({"response": jsonResponse})
 
 def save_routine_table(user, routine_time, products):
     # Cascade delete old routine and its routine-products
