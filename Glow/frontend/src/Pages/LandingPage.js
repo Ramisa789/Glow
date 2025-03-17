@@ -2,7 +2,6 @@ import "./LandingPage.css";
 import React from 'react';
 import Header from './Components/header';
 import LandingPagePic from "./Images/LandingPagePhoto.png";
-import { Link } from 'react-router-dom';
 
 export default function LandingPage() {
     return(

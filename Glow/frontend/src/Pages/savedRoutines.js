@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import noneSavedIcon from './Images/no-saved-icon.svg';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export default function SavedRoutines() {
   const [routines, setRoutines] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +33,7 @@ export default function SavedRoutines() {
       }
 
       const res = await axios.post(
-        "http://127.0.0.1:8000/GetRoutine/",
+        `${apiUrl}/GetRoutine/`,
         {},
         {
             headers: {

@@ -74,29 +74,6 @@ def generate_response(request):
     
     return Response({"response": response.text})
 
-def save_routine_table(user, routine_time, products):
-    # Cascade delete old routine and its routine-products
-    Routine.objects.filter(user=user, time_of_day=routine_time).delete()
-
-    # Create new routine table
-    routine, _ = Routine.objects.get_or_create(user=user, time_of_day=routine_time)
-
-    for product_data in products:
-        # Update or create new products
-        print(product_data["name"].strip(), "/--/", Decimal(product_data["price"].strip()), sep = "")
-        product, _ = Product.objects.update_or_create(
-            name=product_data["name"].strip(),
-            defaults={"price": Decimal(product_data["price"].strip())}
-        )
-
-        RoutineProduct.objects.get_or_create(
-            routine=routine,
-            product=product,
-            instructions=product_data["application"]
-        )
-        
-    print("Routine created!!!")
-
 @api_view(['POST'])
 def save_routine(request):
     print("Debugging: Save Routine endpoint hit.")

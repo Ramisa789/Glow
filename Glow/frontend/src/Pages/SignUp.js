@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export default function SignUp() {
     const [formData, setFormData] = useState({
         username: "",
@@ -13,7 +15,6 @@ export default function SignUp() {
     });
 
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
     const navigate = useNavigate();
 
     const handleInput = (e) => {
@@ -23,7 +24,6 @@ export default function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
-        setSuccess("");
 
         if (formData.password !== formData.confirm_password) {
             setError("Passwords do not match.");
@@ -31,13 +31,12 @@ export default function SignUp() {
         }
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/signup/", {
+            const response = await axios.post(`${apiUrl}/signup/`, {
                 username: formData.username,
                 password: formData.password,
                 confirm_password: formData.confirm_password,
             });
 
-            setSuccess(response.data.message);
             localStorage.setItem('authToken', response.data.token);
             navigate('/skincaregenerator');
         } catch (err) {

@@ -7,6 +7,8 @@ import SkinForm from "./Components/SkinForm";
 import Routine from "./Components/routine";
 import Header from "./Components/header";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export default function SkinCareGenerator() {
     const [response, setResponse] = useState("");
     const [saveStatus, setSaveStatus] = useState(null);
@@ -89,7 +91,7 @@ export default function SkinCareGenerator() {
 
 
         try {
-            const res = await axios.post("http://127.0.0.1:8000/generate/", { prompt });
+            const res = await axios.post(`${apiUrl}/generate/`, { prompt });
             let rawResponse = res.data.response;
             console.log(rawResponse)
     
@@ -118,7 +120,7 @@ export default function SkinCareGenerator() {
             }
 
             const res = await axios.post(
-                "http://127.0.0.1:8000/SaveRoutine/",
+                `${apiUrl}/SaveRoutine/`,
                 response,
                 {
                     headers: {
