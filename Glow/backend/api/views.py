@@ -17,48 +17,48 @@ def home(request):
 
 @csrf_exempt # Allow POST requests for signup
 def signup(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            username = data.get('username')
-            password = data.get('password')
-            confirm_password = data.get("confirm_password")
+    if request.method != 'POST':
+        return JsonResponse({"error": "Invalid request method."}, status=405)
 
-            if not username or not password or not confirm_password:
-                return JsonResponse({"error": "All fields are required."}, status=400)
-            
-            if password != confirm_password:
-                return JsonResponse({"error": "Passwords do not match."}, status=400)
-            
-            if User.objects.filter(username=username).exists():
-                return JsonResponse({"error": "Username already taken."}, status=400)
-            
-            user = User.objects.create_user(username=username, password=password)
-            login(request, user)
-
-            token, created = Token.objects.get_or_create(user=user)
-            return JsonResponse({"message": "User created successfully!", "token": token.key}, status=201)
-        
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid data."}, status=400)
-   
-    return JsonResponse({"error": "Invalid request method."}, status=405)
-
-@csrf_exempt # Allow POST requests for login
-def user_login(request):
-    if request.method == 'POST':
+    try:
         data = json.loads(request.body)
         username = data.get('username')
         password = data.get('password')
+        confirm_password = data.get("confirm_password")
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            token, created = Token.objects.get_or_create(user=user)
-            return JsonResponse({"message": "Login successful!", "token": token.key}, status=200)
-        else:
-            return JsonResponse({"message": "Invalid credentials!"}, status=400)
+        if not username or not password or not confirm_password:
+            return JsonResponse({"error": "All fields are required."}, status=400)
         
-    return JsonResponse({"message": "Invalid request method!"}, status=400)
+        if password != confirm_password:
+            return JsonResponse({"error": "Passwords do not match."}, status=400)
+        
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({"error": "Username already taken."}, status=400)
+        
+        user = User.objects.create_user(username=username, password=password)
+        login(request, user)
+
+        token, created = Token.objects.get_or_create(user=user)
+        return JsonResponse({"message": "User created successfully!", "token": token.key}, status=201)
+    
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid data."}, status=400)
+
+@csrf_exempt # Allow POST requests for login
+def user_login(request):
+    if request.method != 'POST':
+        return JsonResponse({"message": "Invalid request method!"}, status=400)
+    
+    data = json.loads(request.body)
+    username = data.get('username')
+    password = data.get('password')
+
+    user = authenticate(request, username=username, password=password)
+    if user is None:
+        return JsonResponse({"message": "Invalid credentials!"}, status=400)
+    
+    token, created = Token.objects.get_or_create(user=user)
+    return JsonResponse({"message": "Login successful!", "token": token.key}, status=200)
 
 
 genai.configure(api_key=settings.GEMINI_API_KEY)
