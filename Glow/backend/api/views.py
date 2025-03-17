@@ -11,6 +11,7 @@ from django.conf import settings
 import json
 from api.models import Product, Routine, RoutineProduct
 from decimal import Decimal
+from http import HTTPStatus
 
 def home(request):
     return HttpResponse("Hello from Django!")
@@ -18,7 +19,7 @@ def home(request):
 @csrf_exempt # Allow POST requests for signup
 def signup(request):
     if request.method != 'POST':
-        return JsonResponse({"error": "Invalid request method."}, status=405)
+        return JsonResponse({"error": "Invalid request method."}, status=HTTPStatus.METHOD_NOT_ALLOWED)
 
     try:
         data = json.loads(request.body)
@@ -27,27 +28,27 @@ def signup(request):
         confirm_password = data.get("confirm_password")
 
         if not username or not password or not confirm_password:
-            return JsonResponse({"error": "All fields are required."}, status=400)
+            return JsonResponse({"error": "All fields are required."}, status=HTTPStatus.BAD_REQUEST)
         
         if password != confirm_password:
-            return JsonResponse({"error": "Passwords do not match."}, status=400)
+            return JsonResponse({"error": "Passwords do not match."}, status=HTTPStatus.BAD_REQUEST)
         
         if User.objects.filter(username=username).exists():
-            return JsonResponse({"error": "Username already taken."}, status=400)
+            return JsonResponse({"error": "Username already taken."}, status=HTTPStatus.BAD_REQUEST)
         
         user = User.objects.create_user(username=username, password=password)
         login(request, user)
 
         token, created = Token.objects.get_or_create(user=user)
-        return JsonResponse({"message": "User created successfully!", "token": token.key}, status=201)
+        return JsonResponse({"message": "User created successfully!", "token": token.key}, status=HTTPStatus.CREATED)
     
     except json.JSONDecodeError:
-        return JsonResponse({"error": "Invalid data."}, status=400)
+        return JsonResponse({"error": "Invalid data."}, status=HTTPStatus.BAD_REQUEST)
 
 @csrf_exempt # Allow POST requests for login
 def user_login(request):
     if request.method != 'POST':
-        return JsonResponse({"message": "Invalid request method!"}, status=400)
+        return JsonResponse({"message": "Invalid request method!"}, status=HTTPStatus.BAD_REQUEST)
     
     data = json.loads(request.body)
     username = data.get('username')
@@ -55,10 +56,10 @@ def user_login(request):
 
     user = authenticate(request, username=username, password=password)
     if user is None:
-        return JsonResponse({"message": "Invalid credentials!"}, status=400)
+        return JsonResponse({"message": "Invalid credentials!"}, status=HTTPStatus.BAD_REQUEST)
     
     token, created = Token.objects.get_or_create(user=user)
-    return JsonResponse({"message": "Login successful!", "token": token.key}, status=200)
+    return JsonResponse({"message": "Login successful!", "token": token.key}, status=HTTPStatus.OK)
 
 
 genai.configure(api_key=settings.GEMINI_API_KEY)
@@ -103,11 +104,11 @@ def save_routine(request):
 
     user = request.user
     if not user.is_authenticated:
-        return JsonResponse({"error": "Authentication required."}, status=401)
+        return JsonResponse({"error": "Authentication required."}, status=HTTPStatus.UNAUTHORIZED)
 
     data = request.data
     if not isinstance(data, dict):
-        return JsonResponse({"error": "Invalid JSON format"}, status=400)
+        return JsonResponse({"error": "Invalid JSON format"}, status=HTTPStatus.BAD_REQUEST)
 
     try:
         # Create a named routine for the user
@@ -115,7 +116,7 @@ def save_routine(request):
 
         for time_of_day, products in data.items():
             if time_of_day not in ["day", "night"]:
-                return JsonResponse({"error": f"Invalid routine time: {time_of_day}"}, status=400)
+                return JsonResponse({"error": f"Invalid routine time: {time_of_day}"}, status=HTTPStatus.BAD_REQUEST)
 
             for step in products:
                 product_name = step.get("name")
@@ -124,7 +125,7 @@ def save_routine(request):
                 instructions = step.get("application", "N/A")
 
                 if not product_name or not step_number:
-                    return JsonResponse({"error": "Missing required product details."}, status=400)
+                    return JsonResponse({"error": "Missing required product details."}, status=HTTPStatus.BAD_REQUEST)
 
                 # Fetch or create product
                 product, _ = Product.objects.get_or_create(name=product_name, defaults={"price": price})
@@ -138,11 +139,11 @@ def save_routine(request):
                     time_of_day=time_of_day
                 )
 
-        return JsonResponse({"message": "Routine saved successfully!"}, status=201)
+        return JsonResponse({"message": "Routine saved successfully!"}, status=HTTPStatus.CREATED)
 
     except Exception as e:
         print("Error saving routine:", str(e))
-        return JsonResponse({"error": "Failed to save routine. Please try again."}, status=500)
+        return JsonResponse({"error": "Failed to save routine. Please try again."}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
 
 
 @api_view(["POST"])
@@ -150,7 +151,7 @@ def get_routine(request):
 
     user = request.user  # Get the authenticated user
     if not user.is_authenticated:
-        return JsonResponse({"error": "Authentication required."}, status=401)
+        return JsonResponse({"error": "Authentication required."}, status=HTTPStatus.UNAUTHORIZED)
 
     routines = Routine.objects.filter(user=user)
     routine_list = []
