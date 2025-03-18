@@ -171,3 +171,26 @@
 	background: var(--greenLight);
 	cursor: not-allowed;
 }
+
+@media only screen and (max-width: 500px){
+	.item5-skinConcerns,
+	.item1-ingredients,
+	.item2-ethicalSustainability {
+		width: 80%;
+	}
+
+	.dropdown-container,
+	.input-container {
+		max-width: 80%; 
+	}
+
+	.generator-select,
+	.generator-input {
+		font-size: 14px; 
+		width: 80%;
+	}
+
+	.custom-button {
+		font-size: 15px;
+	}
+}
