@@ -12,6 +12,7 @@ import json
 from api.models import Product, Routine, RoutineProduct
 from decimal import Decimal
 from http import HTTPStatus
+from api.QueryBuilder import QueryBuilder
 
 def home(request):
     return HttpResponse("Hello from Django!")
@@ -63,77 +64,20 @@ def user_login(request):
 
 
 def generate_query(formData):
-    # Construct the prompt for Gemini based on form data  
-    prompt = '''  
-    Based on the user's selections, generate a personalized skincare routine.  
+    queryBuilder = QueryBuilder()
+    query = (queryBuilder.add_skin_type(formData["skin_type"])
+             .add_routine_type(formData["routine_type"])
+             .add_skin_concerns(formData["skin_concerns"])
+             .add_product_criteria(formData["product_criteria"])
+             .add_allergies(formData["allergies"])
+             .add_skin_conditions(formData["skin_conditions"])
+             .add_budget(formData["budget"])
+             .add_min_price(formData["min_price"])
+             .add_max_price(formData["max_price"])
+             .build()
+    )
 
-    ### User Selections:
-    - Skin Type: {skin_type}
-    - Routine Type: {routine_type}
-    - Skin Concerns: {skin_concerns}
-    - Product Criteria: {product_criteria}
-    - Allergies: {allergies}
-    - Skin Conditions: {skin_conditions}
-    - Budget: {budget}
-    - Price Range: {min_price} - {max_price}
-    '''.format(skin_type = formData["skin_type"], routine_type = formData["routine_type"], skin_concerns = formData["skin_concerns"], product_criteria = formData["product_criteria"], allergies = formData["allergies"], skin_conditions = formData["skin_conditions"], budget = formData["budget"],  min_price = formData["min_price"], max_price = formData["max_price"])
-    
-    prompt += '''### Expected JSON Format:  
-    Return the routine **strictly** in this format:  
-    {
-    "day": [
-        {
-        "step": 1,
-        "name": "Prudct name",
-        "price": "$17.99",
-        "application": "steps on how to apply"
-        },
-        {
-        "step": 2,
-        "name": "Product name",
-        "price": "$25.00",
-        "application": "steps on how to apply"
-        },
-        {
-        "step": 3,
-        "name": "Product name",
-        "price": "$6.00",
-        "application": "steps on how to apply"
-        }
-    ],
-    "night": [
-        {
-        "step": 1,
-        "name": "Product name",
-        "price": "$17.99",
-        "application": "steps on how to apply"
-        },
-        {
-        "step": 2,
-        "name": "Product name",
-        "price": "$25.00",
-        "application": "steps on how to apply"
-        },
-        {
-        "step": 3,
-        "name": "The Ordinary Niacinamide 10% + Zinc 1%",
-        "price": "$6.00",
-        "application": "steps on how to apply"
-        }
-    ]
-    }
-
-    ### Constraints:  
-    - **Follow the exact JSON structure** provided above.  
-    - **Use the same field names** ("day routine" and "night routine") with lowercase keys.  
-    - Each routine must be an **array of objects** with: "step", "name", "price", and "application".
-    - If the routine type is only "Day", return an empty array for "night routine" and vice versa. If the routine type is both, provide for both day and night.
-    - Do **not** include any extra text, explanations, or formatting outside the JSON response.  
-    - The string held in the application field currently with placeholder "steps on how to apply" should be no longer than 400 characters.
-    - Do **not** include dollar signs on any price fields.
-    '''
-
-    return prompt
+    return query
 
 genai.configure(api_key=settings.GEMINI_API_KEY)
 
