@@ -85,7 +85,6 @@ def generate_query(formData):
 @authentication_classes([])  # Allow unauthenticated access
 @permission_classes([])  # No permission restrictions
 def generate_response(request):
-    print("debugging print statment for this url")
     try:
         query = generate_query(request.data['formData'])
         response = llmConnection.generate_response(query)
@@ -107,7 +106,6 @@ def save_routine_table(user, routine_time, products):
 
     for product_data in products:
         # Update or create new products
-        print(product_data["name"].strip(), "/--/", Decimal(product_data["price"].strip()), sep = "")
         product, _ = Product.objects.update_or_create(
             name=product_data["name"].strip(),
             defaults={"price": Decimal(product_data["price"].strip())}
@@ -119,11 +117,8 @@ def save_routine_table(user, routine_time, products):
             instructions=product_data["application"]
         )
         
-    print("Routine created!!!")
-
 @api_view(['POST'])
 def save_routine(request):
-    print("Debugging: Save Routine endpoint hit.")
 
     user = request.user
     if not user.is_authenticated:

@@ -23,11 +23,9 @@ export default function SkinCareGenerator() {
         try {
             const res = await axios.post("http://127.0.0.1:8000/generate/", { formData });
             let rawResponse = res.data.response;
-            console.log(rawResponse)
 
             // Parse JSON
             let parsedResponse = JSON.parse(rawResponse);
-            console.log(parsedResponse);
             
             // Update state with parsed response
             setResponse(parsedResponse);
