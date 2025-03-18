@@ -3,16 +3,18 @@ from django.contrib.auth import authenticate, login
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import authentication_classes, permission_classes
-import google.generativeai as genai
 from django.conf import settings
 import json
 from api.models import Product, Routine, RoutineProduct
 from decimal import Decimal
 from http import HTTPStatus
 from api.QueryBuilder import QueryBuilder
+from api.LLMAdapter import LLMConnection
+from api.GeminiAdapter import GeminiAdapter
+
+llmConnection = LLMConnection(GeminiAdapter(settings.GEMINI_API_KEY, "gemini-2.0-flash")) 
 
 def home(request):
     return HttpResponse("Hello from Django!")
@@ -79,25 +81,22 @@ def generate_query(formData):
 
     return query
 
-genai.configure(api_key=settings.GEMINI_API_KEY)
-
 @api_view(['POST'])
 @authentication_classes([])  # Allow unauthenticated access
 @permission_classes([])  # No permission restrictions
 def generate_response(request):
     print("debugging print statment for this url")
-    model = genai.GenerativeModel("gemini-2.0-flash")
     try:
         query = generate_query(request.data['formData'])
-        response = model.generate_content(query)
+        response = llmConnection.generate_response(query)
         # Extract actual JSON from response (removing triple backticks)
-        jsonResponse = str(response.text).replace('```json', "").replace('```', "")
-        jsonResponse  = jsonResponse.rstrip(' \t\n\r').lstrip(' \t\n\r')
+        response = response.replace('```json', "").replace('```', "")
+        response  = response.rstrip(' \t\n\r').lstrip(' \t\n\r')
+        jsonResponse = JsonResponse({"response": response})
+        return jsonResponse
     except Exception as e:
-        print("Error saving routine:", str(e))
-        return JsonResponse({"error": "Failed to save routine. Please try again."}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
-
-    return JsonResponse({"response": jsonResponse})
+        print("Error generating routine:", str(e))
+        return JsonResponse({"error": "Failed to generate routine. Please try again."}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
 
 def save_routine_table(user, routine_time, products):
     # Cascade delete old routine and its routine-products
