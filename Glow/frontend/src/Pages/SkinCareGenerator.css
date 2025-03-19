@@ -43,13 +43,13 @@
 	padding: 10px 40px;
 	font-weight: bold;
 	font-size: larger;
-	color: white;
+	color: var(--white);
 	margin-left: 20px;
 }
 
 .save-routine-button:hover {
-    background: rgb(255, 255, 255) ;
-    color:#FF5E5E ;
+    background: var(--white) ;
+    color:var(--redDark);
   }
 
 .save-button-container {

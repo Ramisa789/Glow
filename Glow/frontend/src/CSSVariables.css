@@ -1,12 +1,14 @@
 :root {
 	--black: rgba(0, 0, 0, 1);              /* #000000 */
 	--softBlack: rgba(0, 0, 0, 0.3);        /* #000000 */
+	--blackShadow: rgba(0, 0, 0, 0.2);
 	--white: rgba(255, 255, 255, 1);        /* #FFFFFF */
 	--gray: rgba(233, 233, 233, 1);         /* #E9E9E9 */
 	--beige: rgba(250, 248, 241, 1);        /* #FAF8F1 */
 	--redLight: rgba(255, 219, 219, 1);     /* #FFDBDB */
 	--redDark: rgba(255, 94, 94, 1);        /* #FF5E5E */
 	--redDarker: rgb(210, 71, 71); 
+	--pink: rgb(255, 240, 240);             /* #FFF0F0 */
 	--greenLight: rgba(202, 209, 159, 1);   /* #CAD19F */
 	--greenMid: rgba(145, 152, 105, 1);     /* #919869 */
 	--greenDark: rgba(83, 82, 49, 1);       /* #535231 */

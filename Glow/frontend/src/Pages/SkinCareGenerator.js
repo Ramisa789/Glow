@@ -2,7 +2,6 @@ import "./SkinCareGenerator.css";
 import "../CSSVariables.css"
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-
 import SkinForm from "./Components/SkinForm";
 import Routine from "./Components/routine";
 import Header from "./Components/header";
