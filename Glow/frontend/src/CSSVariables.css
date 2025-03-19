@@ -1,17 +1,29 @@
 :root {
 	--black: rgba(0, 0, 0, 1);              /* #000000 */
 	--softBlack: rgba(0, 0, 0, 0.3);        /* #000000 */
-	--blackShadow: rgba(0, 0, 0, 0.2);
+	--blackShadow: rgba(0, 0, 0, 0.2);		 /* #000000 */
+
 	--white: rgba(255, 255, 255, 1);        /* #FFFFFF */
+
 	--gray: rgba(233, 233, 233, 1);         /* #E9E9E9 */
+
 	--beige: rgba(250, 248, 241, 1);        /* #FAF8F1 */
+
+	--red: rgb(255, 82, 82);                /* #FF5252 */
 	--redLight: rgba(255, 219, 219, 1);     /* #FFDBDB */
 	--redDark: rgba(255, 94, 94, 1);        /* #FF5E5E */
-	--redDarker: rgb(210, 71, 71); 
+	--redDarker: rgb(210, 71, 71);          /* #D24747 */
+
 	--pink: rgb(255, 240, 240);             /* #FFF0F0 */
+	--pinkLight: rgb(255, 247, 247);        /* #FFF7F7 */
+	--pinkMid: rgb(255, 171, 171);          /* #FFABAB */
+	--pinkDark: rgb(255, 154, 154);         /* #FF9A9A */
+	--pinkDarker: rgb(255, 122, 122);       /* #FF7A7A */
+
 	--greenLight: rgba(202, 209, 159, 1);   /* #CAD19F */
 	--greenMid: rgba(145, 152, 105, 1);     /* #919869 */
 	--greenDark: rgba(83, 82, 49, 1);       /* #535231 */
 
 	--fontTitle: 'Inter', sans-serif;
+	--fontParagraph: 'Arial', sans-serif;
 }
