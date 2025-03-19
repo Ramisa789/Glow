@@ -162,6 +162,7 @@ class QueryBuilder:
         - Do **not** include any extra text, explanations, or formatting outside the JSON response.  
         - The string held in the application field currently with placeholder "steps on how to apply" should be no longer than 400 characters.
         - Do **not** include dollar signs on any price fields.
+        - **Only include products that fit the product criteria selected by the user**.
         ''')
 
         return query
