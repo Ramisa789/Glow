@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "./SkinForm.css"
 import Button from "./Button";
 
+// SkinForm component - A form to collect user input for generating skincare routine
 export default function SkinForm({ onSubmit }) {
+	// Initial form data state
 	const [formData, setFormData] = useState({
 		skin_type: "Combination",
 		routine_type: "Day",
@@ -15,26 +17,30 @@ export default function SkinForm({ onSubmit }) {
 		max_price: ""
 	});
 
+	// Handle changes in checkbox inputs (for skin concerns, product criteria, etc.)
 	const handleCheckboxChange = (e) => {
         const { name, value, checked } = e.target;
         setFormData((prev) => ({
             ...prev,
             [name]: checked
-                ? [...prev[name], value]
-                : prev[name].filter((v) => v !== value),
+                ? [...prev[name], value] // Add value if checked
+                : prev[name].filter((v) => v !== value), // Remove value if unchecked
         }));
     };
 
+	// Handle changes in other input fields (text inputs, select dropdowns)
 	const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+	// Handle form submission
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		onSubmit(formData);
 	}
-
+	
+	// Predefined lists for skin concerns, ingredient preferences, and ethical concerns
 	const skinConcerns = [
 		"Acne", "Enlarged Pores", "Loss of Firmness", "Dark Circles", "Hyperpigmentation",
         "Congested Skin", "Sun Damage", "Puffy Eyes", "Dehydrated", "Redness",
