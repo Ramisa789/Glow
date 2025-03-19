@@ -1,5 +1,10 @@
 from textwrap import dedent
 
+'''QueryBuilder Class:
+Constructs a query string for generating a personalized skincare routine based on user inputs. 
+It formats and validates parameters like skin type, routine type, concerns, allergies, and budget 
+before generating a structured query in JSON format for backend processing. '''
+
 class QueryBuilder:
     def __init__(self):
         self.skin_type = None
@@ -20,7 +25,7 @@ class QueryBuilder:
 
     def __validate_argument(self, argument):
         return (isinstance(argument, list) or isinstance(argument, str)) and len(argument) != 0            
-
+    
     def add_skin_type(self, skin_type):
         if self.__validate_argument(skin_type):
             self.skin_type = self.__format_argument(skin_type)

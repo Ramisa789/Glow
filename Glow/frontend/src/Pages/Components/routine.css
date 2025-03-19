@@ -13,8 +13,8 @@
   
   .routine-container {
     display: flex;
-    background: #fff7f7;
-    border: 2px solid #ff7a7a;
+    background: var(--pinkLight);
+    border: 2px solid var(--pinkDarker);
     border-radius: 12px;
     padding: 20px;
     width: 91%;
@@ -31,7 +31,7 @@
   }
   
   .day-routine {
-    border-right: 2px solid #ffabab;
+    border-right: 2px solid var(--pinkMid);
   }
   
   .routine-header {

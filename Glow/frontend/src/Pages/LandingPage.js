@@ -1,8 +1,14 @@
-import "./LandingPage.css";
+import "./LandingPage.css"; // Importing the styles specific to this page
 import React from 'react';
-import Header from './Components/header';
-import LandingPagePic from "./Images/LandingPagePhoto.png";
-import { Link } from 'react-router-dom';
+import Header from './Components/header'; // Importing the Header component
+import LandingPagePic from "./Images/LandingPagePhoto.png"; // Importing an image used on the page
+
+/**
+ * LandingPage Component
+ * This component represents the landing page of the application.
+ * It consists of a header, an image section, and a descriptive text section
+ * to introduce users to the application.
+ */
 
 export default function LandingPage() {
     return(

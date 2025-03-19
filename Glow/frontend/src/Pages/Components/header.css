@@ -2,7 +2,7 @@
   display: flex;  
   align-items: center;  
   justify-content: space-between;
-  background-color: #CAD19F;
+  background-color: var(--greenLight);
   max-width: 92%;
   height: 50px;
   border-radius: 15px;
@@ -23,7 +23,7 @@
 }
 
 .text { 
-  color: #535231;
+  color: var(--greenDark);
   font-size: 38px;
   font-style: italic;
   text-decoration: none;

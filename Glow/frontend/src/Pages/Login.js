@@ -1,23 +1,38 @@
-import "./Credentials.css";
-import Header from './Components/header';
+import "./Credentials.css"; // Importing the styles specific to this page
+import Header from './Components/header'; // Importing the Header component
 import CredentialsGraphic from './Components/CredentialsGraphic';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+/**
+ * Login Component
+ * This component provides a login form where users can enter their credentials.
+ * It manages username and password inputs, handles form submission via an API request,
+ * and provides navigation upon successful authentication.
+ */
+
 export default function Login() {
+    // State variables for storing user input
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState(""); // Stores feedback message (e.g., errors, success messages)
+    
     const navigate = useNavigate();
 
+    /**
+     * Handles form submission
+     * Sends a login request to the backend and handles the response.
+     */
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevents page reload on form submission
 
         const credentials = { username, password };
-        axios.post('http://127.0.0.1:8000/login/', credentials)
+
+        axios.post('http://127.0.0.1:8000/login/', credentials) // Sending credentials to backend
             .then(response => {
-                setMessage(response.data.message);
+                setMessage(response.data.message); // Display response message
+                
                 // Redirect on successful login
                 if (response.data.message === "Login successful!") {
                     localStorage.setItem('authToken', response.data.token);

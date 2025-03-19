@@ -1,5 +1,5 @@
   .saved-routines-header{
-    color: #FF5E5E;
+    color: var(--redDark);
     font-size: 35px;
     font-weight: bold;
     text-align: left;
@@ -18,13 +18,13 @@
     padding: 10px 0;
     display: flex;
     font-size: 15px;
-    color: rgb(255, 255, 255);
+    color: var(--white);
     border: 2px solid ;
     border-radius: 30px;
     cursor: pointer;
     transition: 0.3s;
     width: 250px;
-    background-color: #FF5E5E;
+    background-color: var(--redDark);
     text-align: center;
     margin-left:3%;
     display: flex;
@@ -34,8 +34,8 @@
   }
 
   .back-button:hover {
-    background: rgb(255, 255, 255) ;
-    color:#FF5E5E;
+    background: var(--white) ;
+    color: var(--redDark);
   }
 
   .routine-width {
@@ -69,7 +69,7 @@
   .no-routines-container {
     text-align: center;
     color: var(--redDark);
-    background-color: rgb(255, 240, 240);
+    background-color: var(--pink);
     border: 2px solid var(--redDark);
     border-radius: 12px;
     padding: 200px 20px;

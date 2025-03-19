@@ -1,6 +1,8 @@
 import React from 'react';
 import './routine.css';
 
+// Routine Component:
+// Displays a skincare routine with day and night sections, based on passed data.
 function Routine({ name, created_at, day, night, page }){
     return (
         <div className="routine-wrapper">
