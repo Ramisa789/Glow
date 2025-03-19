@@ -1,26 +1,35 @@
-import "./Credentials.css";
-import Header from './Components/header';
-import CredentialsGraphic from './Components/CredentialsGraphic';
+import "./Credentials.css"; // Importing the styles specific to this page
+import Header from './Components/header'; // Importing the Header component
+import CredentialsGraphic from './Components/CredentialsGraphic'; // Importing the Sign Up component
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+/**
+ * SignUp component handles the user registration process.
+ * It includes input validation, form submission, and error handling.
+ */
+
 export default function SignUp() {
+    // State to manage form input data for username, password, and confirm_password
     const [formData, setFormData] = useState({
         username: "",
         password: "",
         confirm_password: ""
     });
 
+    // State for handling error messages and success feedback
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    //Handles form input changes and updates the state
     const handleInput = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    //Handles form submission, validating the inputs and making the API request
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
@@ -36,8 +45,9 @@ export default function SignUp() {
                 password: formData.password,
                 confirm_password: formData.confirm_password,
             });
-
+            // Store the authentication token in localStorage
             localStorage.setItem('authToken', response.data.token);
+            // Redirect the user to the skincare generator page
             navigate('/skincaregenerator');
         } catch (err) {
             setError(err.response?.data?.error || "Signup failed.");

@@ -1,6 +1,6 @@
-import "./savedRoutines.css";
-import Header from './Components/header';
-import Routine from './Components/routine';
+import "./savedRoutines.css"; // Importing the styles specific to this page
+import Header from './Components/header'; // Importing the Header component
+import Routine from './Components/routine'; // Importing the Routine component
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -8,21 +8,33 @@ import noneSavedIcon from './Images/no-saved-icon.svg';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+/**
+ * Saved Routines Component
+ * Displays a list of the user's saved skincare routines. 
+ * Only authenticated users can access their routines, 
+ */
+
 export default function SavedRoutines() {
+  // State hooks to manage routines data, loading state, and error messages
   const [routines, setRoutines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate()
 
+  // useEffect hook runs on component mount to check if the user is authenticated
   useEffect(() => {
       const token = localStorage.getItem("authToken");
       if (!token) {
-          navigate('/login');
+          navigate('/login'); // Redirect to login if no token is found
       } else {
-          fetchRoutines();
+          fetchRoutines(); // Fetch the routines if the user is authenticated
       }
   }, [navigate]);
 
+  /**
+   * Fetches saved routines from the backend.
+   * Requires a valid authentication token.
+   */
   const fetchRoutines = async () => {
     try {
       const token = localStorage.getItem("authToken");
@@ -32,12 +44,13 @@ export default function SavedRoutines() {
             return;
       }
 
+       // Send POST request to fetch routines
       const res = await axios.post(
         `${apiUrl}/GetRoutine/`,
         {},
         {
             headers: {
-                Authorization: `Token ${token}`,
+                Authorization: `Token ${token}`, // Attach auth token in header
                 "Content-Type": "application/json",
             },
         }
@@ -51,6 +64,7 @@ export default function SavedRoutines() {
     setLoading(false);
   };
   
+  // If there was an error during data fetching, display an error message
   if (error) return <div>Failed to load routines.</div>;
 
   return (
@@ -73,6 +87,7 @@ export default function SavedRoutines() {
         ) : (
           <div>
             {routines.length > 0 ? (
+              // Map over routines and display each one using the Routine component
               routines.map((routine, index) => (
                 <Routine
                   key={index}
@@ -83,6 +98,7 @@ export default function SavedRoutines() {
                 />
               ))
             ) : (
+                // If no routines, display a placeholder image
                 <div className="no-routines-container">
                     <img className="icon-container" src={noneSavedIcon} height={30} width={30} alt="no routines saved icon" />
                     No saved routines.

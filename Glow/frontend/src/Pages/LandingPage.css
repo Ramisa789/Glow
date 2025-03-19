@@ -1,6 +1,6 @@
 body {
-  background-color: #faf8f1;
-  font-family: Arial, sans-serif;
+  background-color: var(--beige);
+  font-family: var(--fontParagraph);
 }
 
 .container {
@@ -14,11 +14,11 @@ body {
   width: 500px; 
   height: 600px; 
   border-radius: 12px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 10px var(--blackShadow);
   overflow: hidden;
   display: flex;
   margin-top: 25px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--white);
 }
 
 .image-box img {
@@ -35,7 +35,7 @@ body {
 }
 
 .about-us {
-  color: #FF5E5E;
+  color: var(--redDark);
   font-size: 50px;
   font-weight: bold;
   font-style: italic;
@@ -46,7 +46,7 @@ body {
 }
 
 .about-us-text {
-  color: #FF5E5E;
+  color: var(--redDark);
   line-height: 1.6;
   text-align: left;
   padding: 80px;
@@ -60,13 +60,13 @@ body {
   display: inline-block;
   padding: 10px 20px;
   font-size: 16px;
-  color: #FF5E5E;
-  border: 2px solid #FF5E5E;
+  color: var(--redDark);
+  border: 2px solid var(--redDark);
   border-radius: 20px;
   cursor: pointer;
   transition: 0.3s;
   width: 250px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--white);
   text-align: center;
   margin-left:80px;
  
@@ -74,8 +74,8 @@ body {
 }
 
 .cta-button:hover {
-  background: #FF5E5E;
-  color:rgb(255, 255, 255);
+  background: var(--redDark);
+  color: var(--white);
 }
 
 @media only screen and (max-width: 1200px){
