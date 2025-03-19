@@ -87,6 +87,7 @@ export default function SkinForm({ onSubmit }) {
 							value={formData.skin_type}
 							onChange={handleInputChange}
 						>
+							<option>Normal</option>
 							<option>Combination</option>
 							<option>Oily</option>
 							<option>Dry</option>
