@@ -7,8 +7,9 @@ from api.views import generate_response
 from api.views import save_routine
 from api.views import get_routine
 
+# URL routing for the application
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), 
     path('', home, name='home'),  
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
