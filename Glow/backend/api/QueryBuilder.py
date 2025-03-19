@@ -162,6 +162,9 @@ class QueryBuilder:
         - Do **not** include any extra text, explanations, or formatting outside the JSON response.  
         - The string held in the application field currently with placeholder "steps on how to apply" should be no longer than 400 characters.
         - Do **not** include dollar signs on any price fields.
+        - The products returned must meet the **selected product criteria**: 
+            - Products should be **fragrance-free**, **alcohol-free**, **paraben-free**, **sulfate-free**, **cruelty-free**, etc., **strictly** according to the selected user preferences.
+            - Any product that does not meet the selected product criteria should be **excluded** from the routine.
         ''')
 
         return query
