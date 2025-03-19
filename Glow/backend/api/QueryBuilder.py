@@ -165,6 +165,8 @@ class QueryBuilder:
         - The products returned must meet the **selected product criteria**: 
             - Products should be **fragrance-free**, **alcohol-free**, **paraben-free**, **sulfate-free**, **cruelty-free**, etc., **strictly** according to the selected user preferences.
             - Any product that does not meet the selected product criteria should be **excluded** from the routine.
+        - **The maximum price of EACH product must NOT exceed the maximum product price specified by the user**.
+        - **The price of EACH product must not be lower than the minimum product price specified by the user**.
         ''')
 
         return query
